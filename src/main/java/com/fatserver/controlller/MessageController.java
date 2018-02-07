@@ -23,6 +23,8 @@ public class MessageController {
     @RequestMapping(value = "/getMessages", method= RequestMethod.GET)
     public List<Message> greeting() {
         messages.clear();
+
+
         addData();
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
         return messages;
