@@ -1,6 +1,7 @@
 package com.fatserver.controlller;
 
 import com.fatserver.dao.UserDao;
+import com.fatserver.entity.LoginForm;
 import com.fatserver.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.social.facebook.api.Post;
@@ -26,6 +27,13 @@ public class UserController {
             return user;
         }
     }
+
+    @PostMapping(value = "/login")
+    public User login(@RequestBody LoginForm loginForm){
+        System.out.println("REQUEST_LOFINFORM");
+        return  userDao.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
+    }
+
 
 
 }
