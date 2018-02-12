@@ -16,13 +16,9 @@ public class UserController {
     @Autowired
     private UserDao userDao;
 
-
-
-
     @PostMapping(value = "/user/add")
     public User addUser(@RequestBody User user){
         System.out.println("REQUEST");
-        System.out.println(user.getAddress());
         if(userDao.findByName(user.getName())!=null){
             return user;
         }else {
@@ -30,8 +26,6 @@ public class UserController {
             return user;
         }
     }
-
-
 
 
 }

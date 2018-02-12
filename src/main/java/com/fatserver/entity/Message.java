@@ -1,5 +1,10 @@
 package com.fatserver.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Created by Victor on 07.02.2018.
  */
