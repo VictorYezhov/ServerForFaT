@@ -17,37 +17,7 @@ public class UserController {
     private UserDao userDao;
 
 
-//    @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-//    public User addUser(@RequestParam(value = "name",defaultValue = "user") String name
-//            , @RequestParam(value = "email", defaultValue = "email@gg.com") String email
-//            ,@RequestParam(value = "password",defaultValue = "password") String password
-//            ,@RequestParam(value = "familyName",defaultValue = "familyName") String familyName
-//            ,@RequestParam(value ="rating",defaultValue = "5") String rating
-//            ,@RequestParam(value = "address",defaultValue = "addres")String address){
-//
-//
-//        User user = new User();
-//
-//        System.out.println("REQUEST");
-//        user.setName(name);
-//        user.setEmail(email);
-//        user.setFamilyName(familyName);
-//        user.setPassword(password);
-//        user.setRating(Integer.parseInt(rating));
-//        if(userDao.findByName(user.getName())!=null){
-//            return user;
-//        }else {
-//        userDao.save(user);
-//        return user;
-//        }
-//    }
-//    @RequestMapping(value = "/simplepost", method = RequestMethod.POST)
-//    public String simplePost(){
-//
-//
-//        System.out.println("REQUEST");
-//        return "simplePost";
-//    }
+
 
     @PostMapping(value = "/user/add")
     public User addUser(@RequestBody User user){
