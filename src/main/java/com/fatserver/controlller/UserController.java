@@ -1,11 +1,9 @@
 package com.fatserver.controlller;
 
-import com.fatserver.dao.UserDao;
 import com.fatserver.entity.LoginForm;
 import com.fatserver.entity.User;
+import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.social.facebook.api.Post;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,15 +13,15 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserDao userDao;
+    private UserService userService;
 
     @PostMapping(value = "/user/add")
     public User addUser(@RequestBody User user){
         System.out.println("REQUEST");
-        if(userDao.findByName(user.getName())!=null){
+        if(userService.findByName(user.getName())!=null){
             return user;
         }else {
-            userDao.save(user);
+            userService.save(user);
             return user;
         }
     }
@@ -31,7 +29,7 @@ public class UserController {
     @PostMapping(value = "/login")
     public User login(@RequestBody LoginForm loginForm){
         System.out.println("REQUEST_LOFINFORM");
-        return  userDao.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
+        return  userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
     }
 
 
