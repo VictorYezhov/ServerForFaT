@@ -1,15 +1,20 @@
 package com.fatserver.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Victor on 11.02.2018.
  */
 @Entity
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -23,6 +28,15 @@ public class User {
     private String address;
     private String mobileNumber;
 
+
+
+    @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Skill> skills;
+
+    public User() {
+        skills = new HashSet<>();
+    }
 
     public String getAddress() {
         return address;
@@ -86,5 +100,13 @@ public class User {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Set<Skill>  getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill>  skills) {
+        this.skills = skills;
     }
 }

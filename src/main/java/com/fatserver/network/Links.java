@@ -6,7 +6,8 @@ import java.util.Arrays;
  * Created by Victor on 07.02.2018.
  */
 public enum Links {
-    BASE("/"),  GETMESSAGE("/getMessages"),HOME("/home"),SAVEUSER("/user/add");
+    BASE("/"),  GETMESSAGE("/getMessages"),HOME("/home"),SAVEUSER("/user/add"),
+    SKILLS("/skills");
 
     private String link;
 

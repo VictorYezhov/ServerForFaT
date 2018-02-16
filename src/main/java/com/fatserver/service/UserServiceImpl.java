@@ -55,4 +55,9 @@ public class UserServiceImpl implements UserService {
     public User findByEmailAndPassword(String email, String password) {
         return userDao.findByEmailAndPassword(email,password);
     }
+
+    @Override
+    public User findUserWithSkills(Long id) {
+        return userDao.findUserWithSkills(id);
+    }
 }
