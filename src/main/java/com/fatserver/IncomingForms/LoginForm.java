@@ -1,4 +1,4 @@
-package com.fatserver.entity;
+package com.fatserver.IncomingForms;
 
 public class LoginForm {
     private String email;

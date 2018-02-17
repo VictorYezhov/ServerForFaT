@@ -1,15 +1,14 @@
 package com.fatserver.controlller;
 
-import com.fatserver.entity.LoginForm;
+import com.fatserver.IncomingForms.LoginForm;
+import com.fatserver.IncomingForms.RegistrationForm;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
-import com.fatserver.service.SkillService;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.jws.soap.SOAPBinding;
 import java.util.Set;
 
 /**
@@ -24,13 +23,14 @@ public class UserController {
 
 
     @PostMapping(value = "/user/add")
-    public User addUser(@RequestBody User user){
+    public User addUser(@RequestBody RegistrationForm user){
         System.out.println("REQUEST");
         if(userService.findByName(user.getName())!=null){
-            return user;
+            return new User(user);
         }else {
-            userService.save(user);
-            return user;
+            User u = new User(user);
+            userService.save(u);
+            return u;
         }
     }
 

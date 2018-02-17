@@ -1,24 +1,19 @@
-package com.fatserver.entity;
+package com.fatserver.IncomingForms;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fatserver.IncomingForms.RegistrationForm;
+import com.fatserver.entity.Skill;
 
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
- * Created by Victor on 11.02.2018.
+ * Created by Victor on 17.02.2018.
  */
-@Entity
-public class User implements Serializable {
+public class RegistrationForm {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+
     private Long id;
 
     private String name;
@@ -30,23 +25,8 @@ public class User implements Serializable {
     private String mobileNumber;
 
 
+    public RegistrationForm() {
 
-    @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Set<Skill> skills;
-
-    public User() {
-        skills = new HashSet<>();
-    }
-
-    public User(RegistrationForm user) {
-        this.name = user.getName();
-        this.familyName = user.getFamilyName();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.rating = user.getRating();
-        this.address = user.getAddress();
-        this.mobileNumber = user.getMobileNumber();
     }
 
     public String getAddress() {
@@ -113,11 +93,5 @@ public class User implements Serializable {
         this.rating = rating;
     }
 
-    public Set<Skill>  getSkills() {
-        return skills;
-    }
 
-    public void setSkills(Set<Skill>  skills) {
-        this.skills = skills;
-    }
 }
