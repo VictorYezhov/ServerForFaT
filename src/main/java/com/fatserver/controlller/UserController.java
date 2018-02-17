@@ -21,8 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private SkillService skillService;
+
 
     @PostMapping(value = "/user/add")
     public User addUser(@RequestBody User user){
