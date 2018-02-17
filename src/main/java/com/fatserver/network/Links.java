@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public enum Links {
     BASE("/"),  GETMESSAGE("/getMessages"),HOME("/home"),SAVEUSER("/user/add"),
-    SKILLS("/skills");
+    SKILLS("/skills"), GETALLSKILLS("/getAllSkills");
 
     private String link;
 
