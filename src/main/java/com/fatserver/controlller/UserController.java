@@ -64,5 +64,14 @@ public class UserController {
     }
 
 
+    @PostMapping(value = "/updateUser")
+    public User updateUser(@RequestBody LoginForm loginForm) {
+        return userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
+    }
+
+
+
+
+
 
 }
