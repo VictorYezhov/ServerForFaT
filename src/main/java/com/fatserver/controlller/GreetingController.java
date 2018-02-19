@@ -31,14 +31,12 @@ public class GreetingController {
     public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
 
-        User user = userService.findOne(Long.decode("9"));
+        User user = userService.findUserWithSkills(Long.decode("9"));
 
         for (Skill s:
              user.getSkills()) {
             System.out.println(s.getName());
         }
-
-
 
         return new Greeting(counter.incrementAndGet(),
                 String.format(template, name));

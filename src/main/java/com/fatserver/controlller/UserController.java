@@ -50,14 +50,15 @@ public class UserController {
     }
 
     @PostMapping(value = "/googleLogin")
-    public User getGoogleUser(@RequestBody User googleUser){
+    public User getGoogleUser(@RequestBody RegistrationForm googleUser){
         System.out.println("REQUEST_GOOGLE_LOGIN");
         User foundUser = userService.findByEmailAndPassword(googleUser.getEmail(), googleUser.getPassword());
         if(foundUser != null){
             return foundUser;
         }else {
-            userService.save(googleUser);
-            return googleUser;
+            User u = new User(googleUser);
+            userService.save(u);
+            return u;
 
         }
     }
