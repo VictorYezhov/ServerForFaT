@@ -35,8 +35,15 @@ public class User implements Serializable {
     @JsonManagedReference
     private Set<Skill> skills;
 
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Question> questions;
+
+
     public User() {
         skills = new HashSet<>();
+        questions = new ArrayList<>();
     }
 
     public User(RegistrationForm user) {
@@ -119,5 +126,13 @@ public class User implements Serializable {
 
     public void setSkills(Set<Skill>  skills) {
         this.skills = skills;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

@@ -1,5 +1,7 @@
 package com.fatserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 
 /**
@@ -17,7 +19,13 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonManagedReference
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    private User user;
 
 
 
@@ -61,5 +69,13 @@ public class Question {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

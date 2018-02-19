@@ -1,6 +1,9 @@
 package com.fatserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,10 +20,12 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Question> questions;
 
 
     public Category() {
+        questions= new ArrayList<>();
     }
 
     public Category(String name) {
