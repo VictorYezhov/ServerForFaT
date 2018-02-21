@@ -65,7 +65,7 @@ public class Job implements Serializable {
 
     @Override
     public String toString() {
-        return "Skill{" +
+        return "Job{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';

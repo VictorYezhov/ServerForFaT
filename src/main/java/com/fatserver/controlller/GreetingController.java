@@ -39,7 +39,6 @@ public class GreetingController {
 
     @RequestMapping(value = "/index")
     public String index(){
-
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
         return "index";
     }
