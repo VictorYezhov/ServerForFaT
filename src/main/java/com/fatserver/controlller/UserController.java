@@ -76,7 +76,7 @@ public class UserController {
 
             System.out.println("Request n update photo");
 
-            return "Photo updated";
+            return "OK";
         }
 
 
