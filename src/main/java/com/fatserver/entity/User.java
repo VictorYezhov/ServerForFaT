@@ -35,11 +35,13 @@ public class User implements Serializable {
     @JsonManagedReference
     private Set<Skill> skills;
 
+    @ManyToMany(mappedBy = "userListJob", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Job> jobs;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Question> questions;
-
 
     public User() {
         skills = new HashSet<>();
@@ -118,6 +120,14 @@ public class User implements Serializable {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Set<Job>  getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(Set<Job>  jobs) {
+        this.jobs = jobs;
     }
 
     public Set<Skill>  getSkills() {
