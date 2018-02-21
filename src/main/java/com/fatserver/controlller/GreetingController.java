@@ -3,6 +3,7 @@ package com.fatserver.controlller;
 
 import com.fatserver.entity.*;
 import com.fatserver.service.*;
+import jdk.nashorn.internal.scripts.JO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,28 +32,9 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    @Transactional
     public User greeting(@RequestParam(value="name", defaultValue="World") String name) {
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
-
-       // Job job = new Job("Elecks", "2015");
-
-        //Job job = jobService.findOne(Long.decode("2"));
-        User user = userServices.findOne(Long.decode("4"));
-
-//        job.getUserList().add(user);
-//        user.getJobs().add(job);
-//        jobService.save(job);
-//        userServices.update(user);
-
-//        Question question = questionService.findOne(Long.decode("6"));
-//        User user = userServices.findOne(Long.decode("6"));
-//        question.setUser(user);
-//        user.getQuestions().add(question);
-//        questionService.save(question);
-//        userServices.update(user);
-
-        return user;
+        return userServices.findOne(Long.decode("1"));
     }
 
     @RequestMapping(value = "/index")

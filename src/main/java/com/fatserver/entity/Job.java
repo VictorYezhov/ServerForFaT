@@ -1,7 +1,6 @@
 package com.fatserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,48 +13,46 @@ public class Job implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String job;
-    private String year;
+    private  String name;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "job_user",
-            joinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id",
                     referencedColumnName = "id"))
     @JsonBackReference
     private Set<User> userListJob;
 
+
     public Job() {
         userListJob = new HashSet<>();
     }
 
-    public Job(String job, String year) {
-        this.job = job;
-        this.year = year;
-
+    public Job(String name) {
+        this.name = name;
     }
 
-    public Job(String job, String year, Set<User> userList) {
-        this.job = job;
-        this.year = year;
-        this.userListJob = userList;
+    public Job(String name, Set<User> userListJob) {
+        this.name = name;
+        this.userListJob = userListJob;
     }
 
 
     public String getName() {
-        return job;
+        return name;
     }
 
     public void setName(String name) {
-        this.job = name;
+        this.name = name;
     }
 
-    public Set<User> getUserList() {
+    public Set<User> getUserListJob() {
         return userListJob;
     }
 
-    public void setUserList(Set<User> userList) {
-        this.userListJob = userList;
+    public void setUserListJob(Set<User> userListJob) {
+        this.userListJob = userListJob;
     }
 
     public Long getId() {
@@ -66,19 +63,11 @@ public class Job implements Serializable {
         this.id = id;
     }
 
-    public String getYear() {
-        return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
-    }
-
     @Override
     public String toString() {
         return "Skill{" +
                 "id=" + id +
-                ", job='" + job + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

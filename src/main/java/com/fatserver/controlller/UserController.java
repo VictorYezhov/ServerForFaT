@@ -7,6 +7,7 @@ import com.fatserver.entity.User;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.Set;
@@ -69,9 +70,17 @@ public class UserController {
         return userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
     }
 
+    @PostMapping(value = "/updatePhoto")
+    public String updateUserPhoto(@RequestBody MultipartFile img) {
+        {
+
+            System.out.println("Request n update photo");
+
+            return "Photo updated";
+        }
 
 
-
+    }
 
 
 }

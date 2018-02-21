@@ -1,7 +1,9 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fatserver.IncomingForms.RegistrationForm;
 
 import javax.persistence.*;
@@ -15,6 +17,7 @@ import java.util.Set;
  * Created by Victor on 11.02.2018.
  */
 @Entity
+
 public class User implements Serializable {
 
     @Id
@@ -28,6 +31,7 @@ public class User implements Serializable {
     private int rating;
     private String address;
     private String mobileNumber;
+    private String pathToImage;
 
 
 
@@ -35,9 +39,11 @@ public class User implements Serializable {
     @JsonManagedReference
     private Set<Skill> skills;
 
-    @ManyToMany(mappedBy = "userListJob", fetch = FetchType.LAZY)
+
+    @ManyToMany(mappedBy = "userListJob")
     @JsonManagedReference
     private Set<Job> jobs;
+
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonBackReference
@@ -45,6 +51,7 @@ public class User implements Serializable {
 
     public User() {
         skills = new HashSet<>();
+        jobs = new HashSet<>();
         questions = new ArrayList<>();
     }
 
@@ -144,5 +151,13 @@ public class User implements Serializable {
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+    }
+
+    public String getPathToImage() {
+        return pathToImage;
+    }
+
+    public void setPathToImage(String pathToImage) {
+        this.pathToImage = pathToImage;
     }
 }
