@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -45,9 +46,7 @@ public class UserController {
     @GetMapping(value = "/skills")
     public Set<Skill> getskills(@RequestParam(name = "id") String id){
         System.out.println("Accepted id "+Long.decode(id));
-
-        return  userService.findUserWithSkills(Long.decode(id)).getSkills();
-
+        return  new HashSet<>( userService.findUserWithSkills(Long.decode(id)));
     }
 
     @PostMapping(value = "/googleLogin")

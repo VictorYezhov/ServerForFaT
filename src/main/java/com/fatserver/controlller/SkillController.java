@@ -33,7 +33,7 @@ public class SkillController {
     @PostMapping(value = "/sendNewSkills")
     public String saveNewSkills(@RequestBody SendSkillsForm skills){
 
-        User user = userService.findUserWithSkills(skills.getUserId());
+        User user = userService.findOne(skills.getUserId());
         Skill skill;
         System.out.println("SKILLS: ");
         for (IncomingSkill s:

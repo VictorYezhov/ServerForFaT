@@ -1,5 +1,6 @@
 package com.fatserver.service;
 
+import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
 import org.springframework.data.repository.query.Param;
 
@@ -22,7 +23,7 @@ public interface UserService {
 
     User findByName(String name);
     User findByEmailAndPassword(String email, String password);
-    User findUserWithSkills(Long id);
+    List<Skill> findUserWithSkills(Long id);
 
 
 
