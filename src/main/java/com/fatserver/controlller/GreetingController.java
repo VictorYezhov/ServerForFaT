@@ -3,7 +3,6 @@ package com.fatserver.controlller;
 
 import com.fatserver.entity.*;
 import com.fatserver.service.*;
-import jdk.nashorn.internal.scripts.JO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;

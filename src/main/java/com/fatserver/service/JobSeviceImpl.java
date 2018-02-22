@@ -36,4 +36,10 @@ public class JobSeviceImpl implements JobService {
     public void update(Job job) {
         jobDao.save(job);
     }
+
+    @Override
+    public List<Job> findJobsForUser(Long id) {
+        //return jobDao.findJobsForUser(id);
+        return null;
+    }
 }

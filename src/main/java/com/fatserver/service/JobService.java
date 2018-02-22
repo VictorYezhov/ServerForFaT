@@ -14,4 +14,6 @@ public interface JobService  {
     void delete(Long  id);
 
     void update(Job job);
+
+    List<Job> findJobsForUser(Long id);
 }
