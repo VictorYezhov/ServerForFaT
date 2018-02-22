@@ -31,9 +31,9 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    public User greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public List<Job> greeting(@RequestParam(value="name", defaultValue="World") String name) {
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
-        return userServices.findOne(Long.decode("1"));
+        return jobService.findJobsForUser(Long.decode("1"));
     }
 
     @RequestMapping(value = "/index")

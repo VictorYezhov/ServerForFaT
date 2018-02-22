@@ -70,16 +70,12 @@ public class UserController {
         return userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
     }
 
-    @PostMapping(value = "/updatePhoto")
-    public String updateUserPhoto(@RequestBody MultipartFile img) {
+    @PostMapping(value = "/updatePhoto" )
+    public String updateUserPhoto(@RequestPart(name = "img") MultipartFile img) {
         {
-
-            System.out.println("Request n update photo");
-
+            System.out.println("Request  update photo "+ img.getOriginalFilename());
             return "OK";
         }
-
-
     }
 
 

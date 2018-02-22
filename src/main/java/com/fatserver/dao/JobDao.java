@@ -12,4 +12,7 @@ public interface JobDao extends JpaRepository<Job, Long> {
 
 
 
+    @Query("select j from Job j left join fetch j.userListJob u where u.id=:id")
+    List<Job> findJobsForUser(@Param("id") Long id);
+
 }

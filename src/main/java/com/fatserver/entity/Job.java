@@ -18,7 +18,7 @@ public class Job implements Serializable {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "job_user",
-            joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "job_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id",
                     referencedColumnName = "id"))
     @JsonBackReference

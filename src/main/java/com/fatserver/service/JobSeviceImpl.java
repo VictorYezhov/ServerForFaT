@@ -39,7 +39,6 @@ public class JobSeviceImpl implements JobService {
 
     @Override
     public List<Job> findJobsForUser(Long id) {
-        //return jobDao.findJobsForUser(id);
-        return null;
+        return jobDao.findJobsForUser(id);
     }
 }
