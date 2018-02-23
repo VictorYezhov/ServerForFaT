@@ -15,7 +15,6 @@ import java.nio.file.Paths;
 public class ImageSaver {
 
     public static void saveImage(User user, MultipartFile image) {
-
         String path =System.getProperty("user.dir") + "/data/Users/"
                 + user.getName()+user.getId()+"/";
         File filePath = new File(path);
@@ -28,7 +27,5 @@ public class ImageSaver {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }
