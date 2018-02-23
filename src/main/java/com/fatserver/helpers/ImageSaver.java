@@ -5,6 +5,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Created by Victor on 20.02.2018.
@@ -13,17 +16,17 @@ public class ImageSaver {
 
     public static void saveImage(User user, MultipartFile image) {
 
-        String path = System.getProperty("catalina.home") + "/resources/Users/"
-                + user.getName() + "/" + image.getOriginalFilename();
-        user.setPathToImage("resources/Users/" + user.getName() + "/" + image.getOriginalFilename());
-
+        String path =System.getProperty("user.dir") + "/data/Users/"
+                + user.getName()+user.getId()+"/";
         File filePath = new File(path);
-
+        filePath.mkdirs();
         try {
-            filePath.mkdirs();
-            image.transferTo(filePath);
+            // Get the file and save it somewhere
+            byte[] bytes = image.getBytes();
+            Path pathTo = Paths.get(path+image.getOriginalFilename());
+            Files.write(pathTo, bytes);
         } catch (IOException e) {
-            System.out.println("error with file");
+            e.printStackTrace();
         }
 
     }

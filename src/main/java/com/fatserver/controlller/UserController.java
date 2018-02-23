@@ -4,6 +4,7 @@ import com.fatserver.IncomingForms.LoginForm;
 import com.fatserver.IncomingForms.RegistrationForm;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
+import com.fatserver.helpers.ImageSaver;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +74,9 @@ public class UserController {
     public String updateUserPhoto(@RequestPart(name = "img") MultipartFile img) {
         {
             System.out.println("Request  update photo "+ img.getOriginalFilename());
+            User user = userService.findOne(Long.decode("1"));
+            ImageSaver.saveImage(user, img);
+            userService.save(user);
             return "OK";
         }
     }

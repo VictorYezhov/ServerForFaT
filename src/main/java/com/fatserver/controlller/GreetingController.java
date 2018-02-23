@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.jws.soap.SOAPBinding;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -31,9 +32,10 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    public List<Job> greeting(@RequestParam(value="name", defaultValue="World") String name) {
-        System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
-        return jobService.findJobsForUser(Long.decode("1"));
+    public Properties greeting(@RequestParam(value="name", defaultValue="World") String name) {
+
+        System.out.println(System.getProperty("user.dir"));
+        return System.getProperties();
     }
 
     @RequestMapping(value = "/index")
