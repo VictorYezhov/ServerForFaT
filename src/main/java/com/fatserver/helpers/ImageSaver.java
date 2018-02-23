@@ -18,6 +18,7 @@ public class ImageSaver {
         String path =System.getProperty("user.dir") + "/data/Users/"
                 + user.getName()+user.getId()+"/";
         File filePath = new File(path);
+        user.setPathToImage(path);
         filePath.mkdirs();
         try {
             // Get the file and save it somewhere

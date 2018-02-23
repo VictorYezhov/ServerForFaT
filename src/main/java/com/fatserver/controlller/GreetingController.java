@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.jws.soap.SOAPBinding;
+import java.io.File;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
@@ -34,7 +35,9 @@ public class GreetingController {
     @RequestMapping(value = "/home", method= RequestMethod.GET)
     public Properties greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
-        System.out.println(System.getProperty("user.dir"));
+        User user = userServices.findOne(Long.decode("1"));
+        File file = new File(user.getPathToImage());
+        System.out.println(file.exists());
         return System.getProperties();
     }
 

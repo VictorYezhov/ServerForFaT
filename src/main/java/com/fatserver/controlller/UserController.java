@@ -76,7 +76,6 @@ public class UserController {
             System.out.println("Request  update photo "+ id);
             User user = userService.findOne(Long.decode(id));
             ImageSaver.saveImage(user, img);
-
             userService.save(user);
             return "OK";
         }
