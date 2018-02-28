@@ -20,7 +20,6 @@ public class MessageController {
     public List<Message> greeting() {
         messages.clear();
 
-
         addData();
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
         return messages;

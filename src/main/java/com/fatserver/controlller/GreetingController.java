@@ -4,14 +4,18 @@ package com.fatserver.controlller;
 import com.fatserver.entity.*;
 import com.fatserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sun.misc.IOUtils;
 
+import javax.imageio.ImageIO;
 import javax.jws.soap.SOAPBinding;
-import java.io.File;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
@@ -42,8 +46,30 @@ public class GreetingController {
     }
 
     @RequestMapping(value = "/index")
+
     public String index(){
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
         return "index";
     }
+    @RequestMapping("/getImage{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
+        String filename = userServices.findOne(Long.decode(id)).getPathToImage();
+        InputStream inputImage = new FileInputStream(filename);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[2048];
+        int l = inputImage.read(buffer);
+        while(l >= 0) {
+            outputStream.write(buffer, 0, l);
+            l = inputImage.read(buffer);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "image/jpg");
+        return new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.OK);
+    }
 }
+
+
+
+
+
+
