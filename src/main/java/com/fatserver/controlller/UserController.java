@@ -7,10 +7,17 @@ import com.fatserver.entity.User;
 import com.fatserver.helpers.ImageSaver;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.soap.SOAPBinding;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -79,6 +86,22 @@ public class UserController {
             userService.save(user);
             return "OK";
         }
+    }
+    @RequestMapping("/getImage{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
+        System.err.println("GET IMAGE REQUEST "+ id);
+        String filename = userService.findOne(Long.decode(id)).getPathToImage();
+        InputStream inputImage = new FileInputStream(filename);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[2048];
+        int l = inputImage.read(buffer);
+        while(l >= 0) {
+            outputStream.write(buffer, 0, l);
+            l = inputImage.read(buffer);
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "image/jpg");
+        return new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.OK);
     }
 
 
