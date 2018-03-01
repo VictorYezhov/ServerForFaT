@@ -16,4 +16,6 @@ public interface JobService  {
     void update(Job job);
 
     List<Job> findJobsForUser(Long id);
+
+    Job findJobByName(String name);
 }

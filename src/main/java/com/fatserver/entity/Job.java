@@ -1,6 +1,7 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fatserver.controlller.JobForm;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,7 +14,7 @@ public class Job implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private  String name;
+    private String name;
 
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -25,12 +26,18 @@ public class Job implements Serializable {
     private Set<User> userListJob;
 
 
+    public Job(JobForm j){
+        this.name = j.getName();
+        userListJob = new HashSet<>();
+    }
+
     public Job() {
         userListJob = new HashSet<>();
     }
 
     public Job(String name) {
         this.name = name;
+
     }
 
     public Job(String name, Set<User> userListJob) {
@@ -46,6 +53,7 @@ public class Job implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
 
     public Set<User> getUserListJob() {
         return userListJob;

@@ -41,4 +41,11 @@ public class JobSeviceImpl implements JobService {
     public List<Job> findJobsForUser(Long id) {
         return jobDao.findJobsForUser(id);
     }
+
+    @Override
+    public Job findJobByName(String name) {
+        return jobDao.findJobByName(name);
+    }
+
+
 }
