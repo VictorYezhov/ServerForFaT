@@ -51,21 +51,7 @@ public class GreetingController {
         System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
         return "index";
     }
-    @RequestMapping("/getImage{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
-        String filename = userServices.findOne(Long.decode(id)).getPathToImage();
-        InputStream inputImage = new FileInputStream(filename);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[2048];
-        int l = inputImage.read(buffer);
-        while(l >= 0) {
-            outputStream.write(buffer, 0, l);
-            l = inputImage.read(buffer);
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "image/jpg");
-        return new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.OK);
-    }
+
 }
 
 
