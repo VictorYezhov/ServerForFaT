@@ -91,6 +91,8 @@ public class UserController {
     public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
         System.err.println("GET IMAGE REQUEST "+ id);
         String filename = userService.findOne(Long.decode(id)).getPathToImage();
+        if(filename ==null)
+            return null;
         InputStream inputImage = new FileInputStream(filename);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[2048];
