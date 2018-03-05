@@ -16,6 +16,9 @@ public class Job implements Serializable {
     private Long id;
     private String name;
 
+    @Enumerated
+    private Type type;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "job_user",
@@ -45,6 +48,19 @@ public class Job implements Serializable {
         this.userListJob = userListJob;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Job(String name, Type type, Set<User> userListJob) {
+        this.name = name;
+        this.type = type;
+        this.userListJob = userListJob;
+    }
 
     public String getName() {
         return name;
