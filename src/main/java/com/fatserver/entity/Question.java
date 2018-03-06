@@ -1,21 +1,31 @@
 package com.fatserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fatserver.helpers.JsonDateSerializer;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Victor on 19.02.2018.
  */
 @Entity
-public class Question {
+public class Question  implements Serializable {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String Discription;
+    private String discription;
+
+    @JsonSerialize(using = JsonDateSerializer.class)
+    private Timestamp dateTime;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -24,18 +34,33 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonManagedReference
+    @JsonBackReference
     private User user;
 
 
+    @ManyToMany(mappedBy = "questionList", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Set<Skill> skills;
+
+
+    public Question(String title, String discription, Category category, User user, Set<Skill> skills, Timestamp DateTime) {
+        this.title = title;
+        this.discription = discription;
+        this.category = category;
+        this.user = user;
+        this.skills = skills;
+        this.dateTime = DateTime;
+    }
 
     public Question(String title, String discription, Category category) {
         this.title = title;
-        Discription = discription;
+        this.discription = discription;
         this.category = category;
     }
 
     public Question() {
+        skills = new HashSet<>();
+        dateTime = getDateTime();
     }
 
 
@@ -56,11 +81,11 @@ public class Question {
     }
 
     public String getDiscription() {
-        return Discription;
+        return discription;
     }
 
     public void setDiscription(String discription) {
-        Discription = discription;
+        this.discription = discription;
     }
 
     public Category getCategory() {
@@ -77,5 +102,34 @@ public class Question {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
+
+    public Timestamp getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Timestamp dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", discription='" + discription + '\'' +
+                ", dateTime=" + dateTime +
+                ", category=" + category +
+                ", user=" + user +
+                ", skills=" + skills +
+                '}';
     }
 }

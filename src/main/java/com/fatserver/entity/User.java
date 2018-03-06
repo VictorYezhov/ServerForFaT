@@ -35,6 +35,7 @@ public class User implements Serializable {
 
 
 
+
     @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Skill> skills;
@@ -46,7 +47,7 @@ public class User implements Serializable {
 
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonManagedReference
     private List<Question> questions;
 
     public User() {

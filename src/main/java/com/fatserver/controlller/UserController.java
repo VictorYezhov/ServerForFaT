@@ -87,7 +87,7 @@ public class UserController {
             return "OK";
         }
     }
-    @RequestMapping("/getImage{id}")
+    @RequestMapping(value = "/getImage{id}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
         System.err.println("GET IMAGE REQUEST "+ id);
         String filename = userService.findOne(Long.decode(id)).getPathToImage();

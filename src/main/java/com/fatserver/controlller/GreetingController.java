@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.jws.soap.SOAPBinding;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
@@ -37,12 +38,13 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
 
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    public Properties greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public Question greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
-        User user = userServices.findOne(Long.decode("1"));
-        File file = new File(user.getPathToImage());
-        System.out.println(file.exists());
-        return System.getProperties();
+
+        Question question = questionService.findOne(Long.decode("1"));
+        System.err.println(question.getUser().getId());
+
+        return question;
     }
 
     @RequestMapping(value = "/index")
