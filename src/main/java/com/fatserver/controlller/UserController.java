@@ -2,6 +2,7 @@ package com.fatserver.controlller;
 
 import com.fatserver.IncomingForms.LoginForm;
 import com.fatserver.IncomingForms.RegistrationForm;
+import com.fatserver.IncomingForms.UserInformationForm;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
 import com.fatserver.helpers.ImageSaver;
@@ -42,6 +43,25 @@ public class UserController {
             userService.save(u);
             return u;
         }
+    }
+
+    @PostMapping(value = "/sendUserInformation{id}")
+    public String changeUserInformation(@RequestBody UserInformationForm userInformationForm, @PathVariable Long id){
+        System.out.println("Number: " + userInformationForm.getNumber());
+        System.out.println("City: " + userInformationForm.getCity());
+        System.out.println("Id: " + id);
+        User user = userService.findOne(id);
+        if(!userInformationForm.getNumber().equals("")){
+            user.setMobileNumber(userInformationForm.getNumber());
+            userService.update(user);
+            return "NUMBER WAS CHANGED";
+        }
+        if(!userInformationForm.getCity().equals("")){
+            user.setAddress(userInformationForm.getCity());
+            userService.update(user);
+            return "CITY WAS CHANGED";
+        }
+        return "FAIL";
     }
 
     @PostMapping(value = "/login")
