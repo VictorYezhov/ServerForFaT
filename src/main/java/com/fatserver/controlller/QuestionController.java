@@ -1,5 +1,6 @@
 package com.fatserver.controlller;
 
+import com.fatserver.comparators.DateComparator;
 import com.fatserver.entity.Question;
 import com.fatserver.entity.User;
 import com.fatserver.sendingForms.QuestionForm;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.jws.soap.SOAPBinding;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +29,9 @@ public class QuestionController {
 
     @GetMapping("/getAllQuestions")//TODO : Filltring and sending only latest questions
     public List<QuestionForm> getAllQuestions(){
-        return questionService.findAll();
+        List<QuestionForm> questionForms = questionService.findAll();
+        Collections.sort(questionForms, new DateComparator());
+        return questionForms;
     }
 
 }
