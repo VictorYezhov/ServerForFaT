@@ -1,5 +1,6 @@
 package com.fatserver.controlller;
 
+import com.fatserver.IncomingForms.JobForm;
 import com.fatserver.entity.Job;
 import com.fatserver.entity.User;
 import com.fatserver.service.JobService;

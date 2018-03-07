@@ -1,8 +1,9 @@
-package com.fatserver.controlller;
+package com.fatserver.IncomingForms;
 
 public class JobForm {
     private Long id;
     private String name;
+    private String description;
 
 
     public JobForm() {
@@ -12,6 +13,10 @@ public class JobForm {
         this.name = name;
     }
 
+    public JobForm(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -27,6 +32,14 @@ public class JobForm {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

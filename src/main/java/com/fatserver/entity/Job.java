@@ -1,7 +1,7 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fatserver.controlller.JobForm;
+import com.fatserver.IncomingForms.JobForm;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +15,7 @@ public class Job implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String description;
 
     @Enumerated
     private Type type;
@@ -56,8 +57,23 @@ public class Job implements Serializable {
         this.type = type;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Job(String name, Type type, Set<User> userListJob) {
         this.name = name;
+        this.type = type;
+        this.userListJob = userListJob;
+    }
+
+    public Job(String name, String description, Type type, Set<User> userListJob) {
+        this.name = name;
+        this.description = description;
         this.type = type;
         this.userListJob = userListJob;
     }
