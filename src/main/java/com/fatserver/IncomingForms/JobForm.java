@@ -1,10 +1,12 @@
 package com.fatserver.IncomingForms;
 
+import com.fatserver.entity.Type;
+
 public class JobForm {
     private Long id;
     private String name;
+    private Type type;
     private String description;
-
 
     public JobForm() {
     }
@@ -13,8 +15,14 @@ public class JobForm {
         this.name = name;
     }
 
-    public JobForm(String name, String description) {
+    public JobForm(String name, Type type) {
         this.name = name;
+        this.type = type;
+    }
+
+    public JobForm(String name, Type type, String description) {
+        this.name = name;
+        this.type = type;
         this.description = description;
     }
 
@@ -40,6 +48,14 @@ public class JobForm {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     @Override

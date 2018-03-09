@@ -32,6 +32,7 @@ public class Job implements Serializable {
 
     public Job(JobForm j){
         this.name = j.getName();
+        this.type = j.getType();
         userListJob = new HashSet<>();
     }
 
