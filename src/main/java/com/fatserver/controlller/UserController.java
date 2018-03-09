@@ -15,10 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.soap.SOAPBinding;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -113,17 +110,21 @@ public class UserController {
         String filename = userService.findOne(Long.decode(id)).getPathToImage();
         if(filename ==null)
             return null;
-        InputStream inputImage = new FileInputStream(filename);
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        byte[] buffer = new byte[2048];
-        int l = inputImage.read(buffer);
-        while(l >= 0) {
-            outputStream.write(buffer, 0, l);
-            l = inputImage.read(buffer);
+        try {
+            InputStream inputImage = new FileInputStream(filename);
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            byte[] buffer = new byte[2048];
+            int l = inputImage.read(buffer);
+            while (l >= 0) {
+                outputStream.write(buffer, 0, l);
+                l = inputImage.read(buffer);
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("Content-Type", "image/jpg");
+            return new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.OK);
+        }catch (FileNotFoundException e){
+            return null;
         }
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "image/jpg");
-        return new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.OK);
     }
 
 
