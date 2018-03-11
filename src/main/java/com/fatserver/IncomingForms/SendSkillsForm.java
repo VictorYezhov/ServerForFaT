@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by Victor on 17.02.2018.
+ * Container for Incoming Skills
  */
 public class SendSkillsForm {
 

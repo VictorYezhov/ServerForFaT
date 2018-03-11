@@ -37,12 +37,15 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
+    /**
+     Only used for testing
+     */
     @RequestMapping(value = "/home", method= RequestMethod.GET)
     public Question greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
 
         Question question = questionService.findOne(Long.decode("1"));
-        System.err.println(question.getUser().getId());
+
 
         return question;
     }

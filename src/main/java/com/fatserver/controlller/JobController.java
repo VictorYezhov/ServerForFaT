@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for processing requests that relate to the jobs\education of user
+ */
 @RestController
 public class JobController {
 
@@ -19,6 +22,11 @@ public class JobController {
     @Autowired
     UserService userService;
 
+    /**
+     * Method returns list of all Jobs and Educational places for user with given id
+     * @param id - user id
+     * @return List<Job> list of jobs for user with id specified in params
+     */
     @GetMapping(value = "/jobs")
     public List<Job> getJobs(@RequestParam(name = "id") String id){
         System.out.println("Accepted id "+Long.decode(id));
@@ -27,6 +35,12 @@ public class JobController {
 
     }
 
+    /**
+     * Add`s to user with id, specified in params, new job\education
+     * @param job - new job to add
+     * @param id - users id
+     * @return
+     */
     @PostMapping(value = "/sendNewJob{id}")
     public String updateJobs(@RequestBody JobForm job, @PathVariable Long id){
         Job j = jobService.findJobByName(job.getName());

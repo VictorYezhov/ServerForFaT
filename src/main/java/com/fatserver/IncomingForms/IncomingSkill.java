@@ -2,6 +2,7 @@ package com.fatserver.IncomingForms;
 
 /**
  * Created by Victor on 17.02.2018.
+ * Class represents skill that client side appilication send to server
  */
 public class IncomingSkill {
 

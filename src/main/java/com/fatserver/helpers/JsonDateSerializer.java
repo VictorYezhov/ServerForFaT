@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Created by Victor on 06.03.2018.
+ * Class for  correct transforming Timestamp to json
  */
 public class JsonDateSerializer extends JsonSerializer<Timestamp> {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

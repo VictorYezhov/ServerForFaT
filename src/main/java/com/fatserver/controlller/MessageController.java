@@ -16,6 +16,7 @@ public class MessageController {
 
     private List<Message> messages =  new ArrayList<>();
 
+    //TODO messaging service between users
     @RequestMapping(value = "/getMessages", method= RequestMethod.GET)
     public List<Message> greeting() {
         messages.clear();

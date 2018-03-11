@@ -1,5 +1,8 @@
 package com.fatserver.IncomingForms;
 
+/**
+ * Class will be used as a container to send public user data
+ */
 public class UserInformationForm {
     private String number;
     private String city;

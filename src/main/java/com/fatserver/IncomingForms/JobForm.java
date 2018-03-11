@@ -2,6 +2,9 @@ package com.fatserver.IncomingForms;
 
 import com.fatserver.entity.Type;
 
+/**
+ * Class represents job that client side appilication send to server
+ */
 public class JobForm {
     private Long id;
     private String name;

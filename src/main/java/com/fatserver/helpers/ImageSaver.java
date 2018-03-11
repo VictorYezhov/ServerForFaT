@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 /**
  * Created by Victor on 20.02.2018.
+ * Class for storing images in file system
  */
 public class ImageSaver {
 

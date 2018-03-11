@@ -15,6 +15,7 @@ import java.util.Set;
 
 /**
  * Created by Victor on 17.02.2018.
+ * Controller for processing requests that relate to the skills set of user
  */
 @RestController
 public class SkillController {
@@ -25,11 +26,20 @@ public class SkillController {
     @Autowired
     SkillService skillService;
 
+    /**
+     * Method returns all available skills from DB
+     * @return
+     */
     @GetMapping(value = "/getAllSkills")
     public List<Skill> getAlSkills(){
         return  skillService.findAll();
     }
 
+    /**
+     * Add new skills to user
+     * @param skills - skills to add to user, and user id
+     * @return
+     */
     @PostMapping(value = "/sendNewSkills")
     public String saveNewSkills(@RequestBody SendSkillsForm skills){
 

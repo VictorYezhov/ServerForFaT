@@ -15,6 +15,7 @@ import java.util.Set;
 
 /**
  * Created by Victor on 11.02.2018.
+ * entity class that represents user
  */
 @Entity
 

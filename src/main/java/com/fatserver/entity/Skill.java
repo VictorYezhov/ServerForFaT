@@ -13,6 +13,7 @@ import java.util.Set;
 
 /**
  * Created by Victor on 16.02.2018.
+ * Entity class for skills
  */
 @Entity
 public class Skill implements Serializable {

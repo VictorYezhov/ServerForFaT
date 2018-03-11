@@ -18,7 +18,9 @@ import java.util.Map;
 
 /**
  * Created by Victor on 06.03.2018.
+ * Controller that processes requests for questions
  */
+
 @RestController
 public class QuestionController {
 
@@ -26,7 +28,10 @@ public class QuestionController {
     QuestionService questionService;
 
 
-
+    /**
+     * Method returns all questions available in DB
+     * @return
+     */
     @GetMapping("/getAllQuestions")//TODO : Filltring and sending only latest questions
     public List<QuestionForm> getAllQuestions(){
         List<QuestionForm> questionForms = questionService.findAll();

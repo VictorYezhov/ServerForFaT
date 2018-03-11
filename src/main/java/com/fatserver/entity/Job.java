@@ -8,6 +8,9 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Entity class that represents job or education of user
+ */
 @Entity
 public class Job implements Serializable {
 

@@ -13,6 +13,7 @@ import java.util.Set;
 
 /**
  * Created by Victor on 19.02.2018.
+ * Entity class which represents question of user
  */
 @Entity
 public class Question  implements Serializable {

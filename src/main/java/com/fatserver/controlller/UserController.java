@@ -21,6 +21,7 @@ import java.util.Set;
 
 /**
  * Created by Victor on 11.02.2018.
+ * Controller for processing requests that relate  user
  */
 @RestController
 public class UserController {
@@ -29,7 +30,12 @@ public class UserController {
     private UserService userService;
 
 
-
+    /**
+     * Registration of new user
+     * TODO - validation
+     * @param user
+     * @return
+     */
     @PostMapping(value = "/user/add")
     public User addUser(@RequestBody RegistrationForm user){
         System.out.println("REQUEST");
@@ -51,22 +57,33 @@ public class UserController {
         if(!userInformationForm.getNumber().equals("")){
             user.setMobileNumber(userInformationForm.getNumber());
             userService.update(user);
-            return "NUMBER WAS CHANGED";
+
         }
         if(!userInformationForm.getCity().equals("")){
             user.setAddress(userInformationForm.getCity());
             userService.update(user);
-            return "CITY WAS CHANGED";
+
         }
-        return "FAIL";
+        return "Information update";
     }
 
+    /**
+     * Simple login method
+     * TODO Security auth. Password encription
+     * @param loginForm
+     * @return
+     */
     @PostMapping(value = "/login")
     public User login(@RequestBody LoginForm loginForm){
         System.out.println("REQUEST_LOFINFORM");
         return   userService.findByEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
     }
 
+    /**
+     * Method that returns skill set of user
+     * @param id - user id
+     * @return
+     */
 
     @GetMapping(value = "/skills")
     public Set<Skill> getskills(@RequestParam(name = "id") String id){
@@ -74,6 +91,10 @@ public class UserController {
         return  new HashSet<>( userService.findUserWithSkills(Long.decode(id)));
     }
 
+    /**
+
+     Method that processes login with Google account
+     */
     @PostMapping(value = "/googleLogin")
     public User getGoogleUser(@RequestBody RegistrationForm googleUser){
         System.out.println("REQUEST_GOOGLE_LOGIN");
@@ -89,11 +110,22 @@ public class UserController {
     }
 
 
+    /**
+     * Method used to update information about user
+     * @param loginForm
+     * @return
+     */
     @PostMapping(value = "/updateUser")
     public User updateUser(@RequestBody LoginForm loginForm) {
         return userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
     }
 
+    /**
+     * Method for updating photo and storing itin file system
+     * @param img
+     * @param id
+     * @return
+     */
     @PostMapping(value = "/updatePhoto{id}")
     public String updateUserPhoto(@RequestPart(name = "img") MultipartFile img, @PathVariable String id) {
         {
@@ -104,6 +136,13 @@ public class UserController {
             return "OK";
         }
     }
+
+    /**
+     * Method that returns image as byte array
+     * @param id
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/getImage{id}", method = RequestMethod.GET)
     public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
         System.err.println("GET IMAGE REQUEST "+ id);
