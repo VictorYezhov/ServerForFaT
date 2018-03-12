@@ -16,8 +16,8 @@ import java.nio.file.Paths;
 public class ImageSaver {
 
     public static void saveImage(User user, MultipartFile image) {
-        String path =System.getProperty("user.dir") + "\\data\\Users\\"
-                + user.getName()+user.getId()+"\\";
+        String path =System.getProperty("user.dir") + "/data/Users/"
+                + user.getName()+user.getId()+"/";
         File filePath = new File(path);
         user.setPathToImage(path+image.getOriginalFilename());
         System.err.println(user.getPathToImage());

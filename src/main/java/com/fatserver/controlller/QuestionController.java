@@ -32,6 +32,7 @@ public class QuestionController {
      * Method returns all questions available in DB
      * @return
      */
+
     @GetMapping("/getAllQuestions")//TODO : Filltring and sending only latest questions
     public List<QuestionForm> getAllQuestions(){
         List<QuestionForm> questionForms = questionService.findAll();

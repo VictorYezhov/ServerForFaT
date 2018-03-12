@@ -1,9 +1,12 @@
 package com.fatserver.controlller;
 
 
+import com.fatserver.dao.SkillDao;
 import com.fatserver.entity.*;
 import com.fatserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,6 +37,9 @@ public class GreetingController {
     private JobService jobService;
     @Autowired
     private SkillService skillService;
+    @Autowired
+    SkillDao skillDao;
+
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
@@ -41,13 +47,14 @@ public class GreetingController {
      Only used for testing
      */
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    public Question greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public Page<Skill> greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
 
         Question question = questionService.findOne(Long.decode("1"));
 
 
-        return question;
+
+        return skillDao.findAll(new PageRequest(0,(int)skillDao.count()/2));
     }
 
     @RequestMapping(value = "/index")
