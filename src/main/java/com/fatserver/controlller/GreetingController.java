@@ -38,6 +38,10 @@ public class GreetingController {
     @Autowired
     private SkillService skillService;
     @Autowired
+    private CityService cityService;
+    @Autowired
+    private CountryService countryService;
+    @Autowired
     SkillDao skillDao;
 
     private static final String template = "Hello, %s!";
@@ -47,14 +51,14 @@ public class GreetingController {
      Only used for testing
      */
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    public Page<Skill> greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public Country greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
 
         Question question = questionService.findOne(Long.decode("1"));
 
 
 
-        return skillDao.findAll(new PageRequest(0,(int)skillDao.count()/2));
+        return countryService.findOne(Long.decode("1"));
     }
 
     @RequestMapping(value = "/index")

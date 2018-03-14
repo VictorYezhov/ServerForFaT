@@ -36,6 +36,13 @@ public class User implements Serializable {
 
 
 
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    @JsonManagedReference
+    private City city;
+
+
+
 
     @ManyToMany(mappedBy = "userList", fetch = FetchType.LAZY)
     @JsonManagedReference
@@ -50,6 +57,8 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Question> questions;
+
+
 
     public User() {
         skills = new HashSet<>();
@@ -161,5 +170,13 @@ public class User implements Serializable {
 
     public void setPathToImage(String pathToImage) {
         this.pathToImage = pathToImage;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
