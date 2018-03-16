@@ -120,6 +120,14 @@ public class UserController {
         return userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
     }
 
+    @PostMapping(value = "/userInfo")
+    public User loadUserInfo(@RequestParam Long id){
+
+        User user = userService.findOne(id);
+        user.setPassword(null);
+        return user;
+    }
+
     /**
      * Method for updating photo and storing itin file system
      * @param img
