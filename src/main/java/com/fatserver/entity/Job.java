@@ -18,7 +18,12 @@ public class Job implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String description;
+
+
+    @ManyToOne
+    @JoinColumn(name = "position_id")
+    @JsonManagedReference
+    private Position position;
 
     @Enumerated
     private Type type;
@@ -61,12 +66,13 @@ public class Job implements Serializable {
         this.type = type;
     }
 
-    public String getDescription() {
-        return description;
+
+    public Position getPosition() {
+        return position;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public Job(String name, Type type, Set<User> userListJob) {
@@ -75,9 +81,8 @@ public class Job implements Serializable {
         this.userListJob = userListJob;
     }
 
-    public Job(String name, String description, Type type, Set<User> userListJob) {
+    public Job(String name, Position description, Type type, Set<User> userListJob) {
         this.name = name;
-        this.description = description;
         this.type = type;
         this.userListJob = userListJob;
     }
@@ -106,6 +111,7 @@ public class Job implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
 
     @Override
     public String toString() {
