@@ -24,10 +24,9 @@ public class IncomingQuestion {
         this.dateTime = getDateTime();
     }
 
-    public IncomingQuestion(String title, String discription, Timestamp DateTime, Set<IncomingSkill> skills, Integer price) {
+    public IncomingQuestion(String title, String discription, Set<IncomingSkill> skills, Integer price) {
         this.title = title;
         this.discription = discription;
-        this.dateTime = DateTime;
         this.skills = skills;
         this.price = price;
     }

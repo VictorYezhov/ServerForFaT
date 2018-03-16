@@ -43,18 +43,18 @@ public class Question  implements Serializable {
     private Set<Skill> skills;
 
 
-    public Question(String title, String discription, User user, Set<Skill> skills, Timestamp DateTime) {
+    public Question(String title, String discription, User user, Set<Skill> skills, Integer price, Timestamp DateTime) {
         this.title = title;
         this.discription = discription;
         this.user = user;
         this.skills = skills;
+        this.price = price;
         this.dateTime = DateTime;
     }
 
     public Question(IncomingQuestion incomingQuestion){
         this.title = incomingQuestion.getTitle();
         this.discription = incomingQuestion.getDiscription();
-        //this.skills = incomingQuestion.getSkills();
         this.dateTime = incomingQuestion.getDateTime();
         this.price = incomingQuestion.getPrice();
     }
@@ -95,6 +95,13 @@ public class Question  implements Serializable {
         this.discription = discription;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 
     public User getUser() {
         return user;
