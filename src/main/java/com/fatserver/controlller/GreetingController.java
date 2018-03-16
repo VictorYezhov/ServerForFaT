@@ -30,8 +30,6 @@ public class GreetingController {
     @Autowired
     private QuestionService questionService;
     @Autowired
-    private CategoryService categoryService;
-    @Autowired
     private UserService userServices;
     @Autowired
     private JobService jobService;

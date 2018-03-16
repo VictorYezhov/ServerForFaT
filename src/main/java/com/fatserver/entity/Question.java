@@ -3,6 +3,7 @@ package com.fatserver.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fatserver.IncomingForms.IncomingQuestion;
 import com.fatserver.helpers.JsonDateSerializer;
 
 import javax.persistence.*;
@@ -24,14 +25,12 @@ public class Question  implements Serializable {
     private Long id;
     private String title;
     private String discription;
+    private Integer price;
 
     @JsonSerialize(using = JsonDateSerializer.class)
     private Timestamp dateTime;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    @JsonManagedReference
-    private Category category;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -44,19 +43,26 @@ public class Question  implements Serializable {
     private Set<Skill> skills;
 
 
-    public Question(String title, String discription, Category category, User user, Set<Skill> skills, Timestamp DateTime) {
+    public Question(String title, String discription, User user, Set<Skill> skills, Timestamp DateTime) {
         this.title = title;
         this.discription = discription;
-        this.category = category;
         this.user = user;
         this.skills = skills;
         this.dateTime = DateTime;
     }
 
-    public Question(String title, String discription, Category category) {
+    public Question(IncomingQuestion incomingQuestion){
+        this.title = incomingQuestion.getTitle();
+        this.discription = incomingQuestion.getDiscription();
+        //this.skills = incomingQuestion.getSkills();
+        this.dateTime = incomingQuestion.getDateTime();
+        this.price = incomingQuestion.getPrice();
+    }
+
+
+    public Question(String title, String discription){
         this.title = title;
         this.discription = discription;
-        this.category = category;
     }
 
     public Question() {
@@ -89,13 +95,6 @@ public class Question  implements Serializable {
         this.discription = discription;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 
     public User getUser() {
         return user;
@@ -128,7 +127,6 @@ public class Question  implements Serializable {
                 ", title='" + title + '\'' +
                 ", discription='" + discription + '\'' +
                 ", dateTime=" + dateTime +
-                ", category=" + category +
                 ", user=" + user +
                 ", skills=" + skills +
                 '}';
