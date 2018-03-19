@@ -1,6 +1,7 @@
 package com.fatserver.controlller;
 
 
+import com.fatserver.dao.JobPositionDao;
 import com.fatserver.dao.SkillDao;
 import com.fatserver.entity.*;
 import com.fatserver.service.*;
@@ -39,6 +40,8 @@ public class GreetingController {
     private CityService cityService;
     @Autowired
     private CountryService countryService;
+    @Autowired
+    private JobPositionDao positionDao;
     @Autowired
     SkillDao skillDao;
 
