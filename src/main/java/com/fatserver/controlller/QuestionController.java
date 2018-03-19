@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.jws.soap.SOAPBinding;
+import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -61,6 +62,7 @@ public class QuestionController {
             questionToSave.getSkills().add(skill);
         }
         questionToSave.setUser(user);
+        questionToSave.setDateTime(new Timestamp(System.currentTimeMillis()));
         user.getQuestions().add(questionToSave);
         questionService.save(questionToSave);
 
