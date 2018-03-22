@@ -6,13 +6,24 @@ package com.fatserver.IncomingForms;
 public class UserInformationForm {
     private String number;
     private String city;
+    private String country;
 
     public UserInformationForm(){
     }
 
-    public UserInformationForm(String number, String city){
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public UserInformationForm(String number, String city, String country){
         this.number = number;
         this.city = city;
+        this.country = country;
+
     }
 
 

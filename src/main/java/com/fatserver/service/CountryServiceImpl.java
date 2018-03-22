@@ -42,4 +42,9 @@ public class CountryServiceImpl implements CountryService {
     public void update(Country country) {
         countryDao.save(country);
     }
+
+    @Override
+    public Country findCountryByName(String name) {
+        return countryDao.findCountryByName(name);
+    }
 }

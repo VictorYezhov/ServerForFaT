@@ -52,14 +52,17 @@ public class GreetingController {
      Only used for testing
      */
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    public User greeting(@RequestParam(value="name", defaultValue="World") String name) {
-
-
-        Question question = questionService.findOne(Long.decode("1"));
+    public List<Country> greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
 
 
-        return userServices.findOne(Long.decode("1"));
+
+
+        Question question = questionService.findOne(Long.decode("12"));
+
+
+
+        return countryService.findAll();
     }
 
     @RequestMapping(value = "/index")
