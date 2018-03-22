@@ -1,6 +1,7 @@
 package com.fatserver.service;
 
 import com.fatserver.entity.City;
+import com.fatserver.entity.Country;
 import com.fatserver.entity.Job;
 
 import java.util.List;
@@ -19,5 +20,7 @@ public interface CityService {
     void delete(Long  id);
 
     void update(City job);
+
+    City findCityByName(String  name,Long id);
 
 }

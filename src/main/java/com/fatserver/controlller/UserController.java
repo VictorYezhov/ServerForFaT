@@ -3,9 +3,13 @@ package com.fatserver.controlller;
 import com.fatserver.IncomingForms.LoginForm;
 import com.fatserver.IncomingForms.RegistrationForm;
 import com.fatserver.IncomingForms.UserInformationForm;
+import com.fatserver.entity.City;
+import com.fatserver.entity.Country;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
 import com.fatserver.helpers.ImageSaver;
+import com.fatserver.service.CityService;
+import com.fatserver.service.CountryService;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +32,10 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private CityService cityService;
+    @Autowired
+    private CountryService countryService;
 
 
     /**
@@ -50,21 +58,39 @@ public class UserController {
 
     @PostMapping(value = "/sendUserInformation{id}")
     public String changeUserInformation(@RequestBody UserInformationForm userInformationForm, @PathVariable Long id){
-        System.out.println("Number: " + userInformationForm.getNumber());
-        System.out.println("City: " + userInformationForm.getCity());
-        System.out.println("Id: " + id);
+
+
+        System.out.println(userInformationForm.getNumber());
+        System.out.println(userInformationForm.getCountry());
+        System.out.println(userInformationForm.getCity());
+
         User user = userService.findOne(id);
         if(!userInformationForm.getNumber().equals("")){
             user.setMobileNumber(userInformationForm.getNumber());
             userService.update(user);
-
         }
-        if(!userInformationForm.getCity().equals("")){
-            user.setAddress(userInformationForm.getCity());
-            userService.update(user);
-
+        Country country  = countryService.findCountryByName(userInformationForm.getCountry());
+        System.out.println(country.getName());
+        if(country != null){
+            City city = cityService.findCityByName(userInformationForm.getCity(), country.getId());
+            if( city != null){
+                user.setCity(city);
+                userService.update(user);
+            }else {
+                city = new City();
+                city.setName(userInformationForm.getCity());
+                city.setCountry(country);
+                user.setCity(city);
+                System.out.println(city.getName());
+                cityService.save(city);
+                userService.update(user);
+            }
+        }else {
+            return "Enter valid country";
         }
-        return "Information update";
+
+
+        return "Information updated";
     }
 
     /**

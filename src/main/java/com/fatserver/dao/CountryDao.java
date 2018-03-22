@@ -8,8 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CountryDao extends JpaRepository<Country, Long> {
 
-
-
-
-
+    Country findCountryByName(String name);
 }

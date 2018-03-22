@@ -20,5 +20,7 @@ public interface CountryService {
 
     void update(Country job);
 
+    Country findCountryByName(String name);
+
 
 }
