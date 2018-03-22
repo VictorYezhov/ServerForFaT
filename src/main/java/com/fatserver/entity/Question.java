@@ -132,6 +132,14 @@ public class Question  implements Serializable {
         this.dateTime = dateTime;
     }
 
+    public List<Comment> getCommentsList() {
+        return commentsList;
+    }
+
+    public void setCommentsList(List<Comment> commentsList) {
+        this.commentsList = commentsList;
+    }
+
     @Override
     public String toString() {
         return "Question{" +

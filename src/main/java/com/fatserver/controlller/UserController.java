@@ -7,6 +7,7 @@ import com.fatserver.entity.City;
 import com.fatserver.entity.Country;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
+import com.fatserver.helpers.ImageLoader;
 import com.fatserver.helpers.ImageSaver;
 import com.fatserver.service.CityService;
 import com.fatserver.service.CountryService;
@@ -181,23 +182,7 @@ public class UserController {
     public ResponseEntity<byte[]> getImage(@PathVariable String id) throws IOException {
         System.err.println("GET IMAGE REQUEST "+ id);
         String filename = userService.findOne(Long.decode(id)).getPathToImage();
-        if(filename ==null)
-            return null;
-        try {
-            InputStream inputImage = new FileInputStream(filename);
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            byte[] buffer = new byte[2048];
-            int l = inputImage.read(buffer);
-            while (l >= 0) {
-                outputStream.write(buffer, 0, l);
-                l = inputImage.read(buffer);
-            }
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Content-Type", "image/jpg");
-            return new ResponseEntity<byte[]>(outputStream.toByteArray(), headers, HttpStatus.OK);
-        }catch (FileNotFoundException e){
-            return null;
-        }
+       return ImageLoader.loadImageFromFileSystem(filename);
     }
 
 
