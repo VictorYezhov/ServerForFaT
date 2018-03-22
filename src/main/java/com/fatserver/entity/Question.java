@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -41,6 +42,10 @@ public class Question  implements Serializable {
     @ManyToMany(mappedBy = "questionList", fetch = FetchType.LAZY)
     @JsonManagedReference
     private Set<Skill> skills;
+
+    @OneToMany(mappedBy = "question_com", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Comment> commentsList;
 
 
     public Question(String title, String discription, User user, Set<Skill> skills, Integer price, Timestamp DateTime) {
