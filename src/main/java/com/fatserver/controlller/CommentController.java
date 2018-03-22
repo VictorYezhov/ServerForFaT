@@ -47,7 +47,7 @@ public class CommentController {
             commentForm.setComment(com);
             commentForm.setUserName(user.getName());
             commentForm.setUserSurname(user.getFamilyName());
-            commentForm.setImage(ImageLoader.loadImageFromFileSystem(user.getPathToImage()).getBody());
+//            commentForm.setImage(ImageLoader.loadImageFromFileSystem(user.getPathToImage()).getBody());
             commentForms.add(commentForm);
 
         }

@@ -11,7 +11,7 @@ public class CommentForm {
     private Comment comment;
     private String userName;
     private String userSurname;
-    byte[] image;
+    //byte[] image;
 
 
     public Comment getComment() {
@@ -22,13 +22,13 @@ public class CommentForm {
         this.comment = comment;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+//    public byte[] getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(byte[] image) {
+//        this.image = image;
+//    }
 
     public String getUserName() {
         return userName;
