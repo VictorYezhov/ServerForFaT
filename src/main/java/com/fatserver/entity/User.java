@@ -67,6 +67,7 @@ public class User implements Serializable {
     }
 
     public User(RegistrationForm user) {
+
         this.name = user.getName();
         this.familyName = user.getFamilyName();
         this.email = user.getEmail();
