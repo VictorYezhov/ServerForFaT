@@ -47,6 +47,10 @@ public class QuestionController {
     @GetMapping("/getAllQuestions")//TODO : Filltring and sending only latest questions
     public List<QuestionForm> getAllQuestions(){
         List<QuestionForm> questionForms = questionService.findAll();
+        for (QuestionForm qf:
+             questionForms) {
+            qf.getQuestion().setCommentsList(null);
+        }
         Collections.sort(questionForms, new DateComparator());
         return questionForms;
     }

@@ -1,6 +1,7 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fatserver.helpers.JsonDateSerializer;
 
@@ -22,7 +23,7 @@ public class Comment implements Serializable {
     private Timestamp dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "question_id")
     private Question question_com;
 

@@ -65,9 +65,9 @@ public class CommentController {
         System.out.println("Works!!!!!!!!!!!!!!!!!!!!!!!");
         System.out.println(comment.getTextComment());
 
-        commentsService.save(comment);
-
         Question q = questionService.findOne(id);
+        comment.setQuestion_com(q);
+        commentsService.save(comment);
         q.getCommentsList().add(comment);
 
         questionService.update(q);
