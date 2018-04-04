@@ -1,6 +1,7 @@
 package com.fatserver.controlller;
 
 import com.fatserver.entity.Comment;
+import com.fatserver.entity.Question;
 import com.fatserver.entity.User;
 import com.fatserver.helpers.ImageLoader;
 import com.fatserver.sendingForms.CommentForm;
@@ -8,10 +9,9 @@ import com.fatserver.service.CommentsService;
 import com.fatserver.service.QuestionService;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,5 +56,23 @@ public class CommentController {
     }
 
 
+
+
+    @PostMapping(value = "/sendNewComment{id}")
+    public String sendedComment(@RequestBody Comment comment, @PathVariable Long id){
+        comment.setDateTime(new Timestamp(System.currentTimeMillis()));
+
+        System.out.println("Works!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(comment.getTextComment());
+
+        commentsService.save(comment);
+
+        Question q = questionService.findOne(id);
+        q.getCommentsList().add(comment);
+
+        questionService.update(q);
+
+        return "OK";
+    }
 
 }
