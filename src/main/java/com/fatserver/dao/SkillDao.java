@@ -13,5 +13,5 @@ import java.util.List;
  */
 public interface SkillDao extends JpaRepository<Skill, Long> {
 
-
+    Skill findFirstByName(String name);
 }

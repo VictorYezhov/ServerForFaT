@@ -20,5 +20,7 @@ public interface SkillService {
 
     void update(Skill skill);
 
+    Skill findByName(String name);
+
 
 }

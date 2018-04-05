@@ -60,15 +60,19 @@ public class QuestionController {
         System.out.println("Question: " + question.getTitle());
         Question questionToSave = new Question(question);
         User user = userService.findOne(id);
-        Skill skill;
+        Skill skill = null;
         for (IncomingSkill s:question.getSkills()) {
-            skill = skillService.findOne(s.getId());
+            skill = skillService.findByName(s.getName());
             questionToSave.getSkills().add(skill);
+            skill.getQuestionList().add(questionToSave);
+
         }
         questionToSave.setUser(user);
         questionToSave.setDateTime(new Timestamp(System.currentTimeMillis()));
         user.getQuestions().add(questionToSave);
         questionService.save(questionToSave);
+        skillService.save(skill);
+
 
         return "OK";
     }

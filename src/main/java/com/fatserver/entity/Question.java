@@ -9,6 +9,7 @@ import com.fatserver.helpers.JsonDateSerializer;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,6 +63,8 @@ public class Question  implements Serializable {
         this.discription = incomingQuestion.getDiscription();
         this.dateTime = incomingQuestion.getDateTime();
         this.price = incomingQuestion.getPrice();
+        skills = new HashSet<>();
+        commentsList = new ArrayList<>();
     }
 
 

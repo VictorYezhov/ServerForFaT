@@ -43,4 +43,9 @@ public class SkillSeviceImpl implements SkillService{
     public void update(Skill skill) {
         skillDao.save(skill);
     }
+
+    @Override
+    public Skill findByName(String name) {
+        return skillDao.findFirstByName(name);
+    }
 }
