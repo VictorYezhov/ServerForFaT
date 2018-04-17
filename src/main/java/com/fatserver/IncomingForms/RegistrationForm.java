@@ -1,6 +1,8 @@
 package com.fatserver.IncomingForms;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fatserver.entity.City;
 import com.fatserver.entity.Skill;
 
 import javax.persistence.FetchType;
@@ -23,6 +25,7 @@ public class RegistrationForm {
     private int rating;
     private String address;
     private String mobileNumber;
+    private IncomingCity city;
 
 
     public RegistrationForm() {
@@ -93,5 +96,11 @@ public class RegistrationForm {
         this.rating = rating;
     }
 
+    public IncomingCity getCity() {
+        return city;
+    }
 
+    public void setCity(IncomingCity city) {
+        this.city = city;
+    }
 }

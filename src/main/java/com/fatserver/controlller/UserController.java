@@ -47,23 +47,43 @@ public class UserController {
      */
     @PostMapping(value = "/user/add")
     public User addUser(@RequestBody RegistrationForm user){
-        System.out.println("REQUEST");
+        System.out.println("Registration request");
+        Country country = countryService.findCountryByName(user.getCity().getCountry().getName());
+        City city;
+
+
         if(userService.findByName(user.getName())!=null){
             return new User(user);
         }else {
-            User u = new User(user);
-            userService.save(u);
-            return u;
+            User newUser = new User(user);
+            if(country != null){
+                city = cityService.findCityByName(user.getCity().getName(), country.getId());
+                if( city != null){
+                    newUser.setCity(city);
+                }else {
+                    city = new City();
+                    city.setName(user.getCity().getName());
+                    city.setCountry(country);
+                    newUser.setCity(city);
+                    cityService.save(city);
+                }
+            }else {
+                return null;
+            }
+            userService.save(newUser);
+            return newUser;
         }
+
+
+
+
+
+
     }
 
     @PostMapping(value = "/sendUserInformation{id}")
     public String changeUserInformation(@RequestBody UserInformationForm userInformationForm, @PathVariable Long id){
 
-
-        System.out.println(userInformationForm.getNumber());
-        System.out.println(userInformationForm.getCountry());
-        System.out.println(userInformationForm.getCity());
 
         User user = userService.findOne(id);
         if(!userInformationForm.getNumber().equals("")){
