@@ -69,10 +69,17 @@ public class JobController {
         System.out.println(id);
         User u = userService.findOne(id_user);
         Job j = jobService.findOne(id);
+
         Set<Job> allJobs = u.getJobs();
         allJobs.remove(j);
         u.setJobs(allJobs);
         userService.update(u);
+
+        Set<User> allUsers = j.getUserListJob();
+        allUsers.remove(u);
+        j.setUserListJob(allUsers);
+        jobService.update(j);
+
         return "OK";
     }
 
