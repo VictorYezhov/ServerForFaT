@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Controller for processing requests that relate to the jobs\education of user
@@ -60,6 +61,18 @@ public class JobController {
         }
         //jobService.update(new Job(job));
 
+        return "OK";
+    }
+
+    @PostMapping(value = "/deleteItemFromJobList{id}")
+    public String deleteItemFromJobList(@RequestBody Long id_user ,@PathVariable Long id){
+        System.out.println(id);
+        User u = userService.findOne(id_user);
+        Job j = jobService.findOne(id);
+        Set<Job> allJobs = u.getJobs();
+        allJobs.remove(j);
+        u.setJobs(allJobs);
+        userService.update(u);
         return "OK";
     }
 
