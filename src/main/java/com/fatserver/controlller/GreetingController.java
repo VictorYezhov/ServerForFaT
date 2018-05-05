@@ -51,8 +51,14 @@ public class GreetingController {
     @Autowired
     CommentDao commentDao;
 
+    private NotificationSender notificationSender;
+
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
+
+    public GreetingController(NotificationSender notificationSender) {
+        this.notificationSender = notificationSender;
+    }
 
     /**
      Only used for testing
@@ -62,6 +68,11 @@ public class GreetingController {
 
 
         List<CommentForm> commentForms = new ArrayList<>();
+
+
+        User usetTo = userServices.findOne(1L);
+        User userFrom = userServices.findOne(2L);
+        notificationSender.sendNotification(userFrom,usetTo);
 
 
         return commentForms;

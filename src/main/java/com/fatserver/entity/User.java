@@ -34,6 +34,8 @@ public class User implements Serializable {
     private String mobileNumber;
     private String pathToImage;
 
+    private String gcmRegId;
+
 
 
     @ManyToOne
@@ -179,5 +181,12 @@ public class User implements Serializable {
 
     public void setCity(City city) {
         this.city = city;
+    }
+    public String getGcmRegId() {
+        return gcmRegId;
+    }
+
+    public void setGcmRegId(String gcmRegId) {
+        this.gcmRegId = gcmRegId;
     }
 }

@@ -138,6 +138,8 @@ public class UserController {
         return  new HashSet<>( userService.findUserWithSkills(Long.decode(id)));
     }
 
+
+
     /**
 
      Method that processes login with Google account
@@ -203,6 +205,19 @@ public class UserController {
         System.err.println("GET IMAGE REQUEST "+ id);
         String filename = userService.findOne(Long.decode(id)).getPathToImage();
        return ImageLoader.loadImageFromFileSystem(filename);
+    }
+
+    @PostMapping("/updateFCMIdToken")
+    public String updateFcmIdToken(@RequestParam("user_id") Long userId, @RequestParam("token") String token){
+
+        System.out.println("USER ID"+userId);
+        System.out.println("TOKEN "+ token);
+
+        User user = userService.findOne(userId);
+        user.setGcmRegId(token);
+        userService.update(user);
+
+        return "OK";
     }
 
 
