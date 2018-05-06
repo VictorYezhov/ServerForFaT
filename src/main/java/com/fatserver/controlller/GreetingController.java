@@ -1,12 +1,12 @@
 package com.fatserver.controlller;
 
 
-import com.fatserver.dao.CommentDao;
-import com.fatserver.dao.JobPositionDao;
-import com.fatserver.dao.SkillDao;
+import com.fatserver.dao.*;
 import com.fatserver.entity.*;
 import com.fatserver.helpers.ImageLoader;
 import com.fatserver.sendingForms.CommentForm;
+import com.fatserver.sendingForms.ContactDTO;
+import com.fatserver.sendingForms.MessageDTO;
 import com.fatserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,6 +50,11 @@ public class GreetingController {
     SkillDao skillDao;
     @Autowired
     CommentDao commentDao;
+    @Autowired
+    ContactService contactService;
+
+    @Autowired
+    MessageDao messageDao;
 
     private NotificationSender notificationSender;
 
@@ -64,18 +69,23 @@ public class GreetingController {
      Only used for testing
      */
     @RequestMapping(value = "/home", method= RequestMethod.GET)
-    public List<CommentForm> greeting(@RequestParam(value="name", defaultValue="World") String name) {
+    public List<MessageDTO> greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
 
-        List<CommentForm> commentForms = new ArrayList<>();
+        List<Message> commentForms = messageDao.findAll();
+
+        List<MessageDTO> mDTOS = new ArrayList<>();
+
+        for(Message c:commentForms){
+            mDTOS.add(new MessageDTO(c));
+        }
+
+//        User usetTo = userServices.findOne(1L);
+//        User userFrom = userServices.findOne(2L);
+//        notificationSender.sendNotification(userFrom,usetTo);
 
 
-        User usetTo = userServices.findOne(1L);
-        User userFrom = userServices.findOne(2L);
-        notificationSender.sendNotification(userFrom,usetTo);
-
-
-        return commentForms;
+        return mDTOS;
     }
 
     @RequestMapping(value = "/index")

@@ -1,8 +1,10 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Victor on 06.05.2018.
@@ -23,9 +25,9 @@ public class Contact {
     @JsonBackReference
     private User side2;
 
-
-
-
+    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Message> messages;
 
 
 

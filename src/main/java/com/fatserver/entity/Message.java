@@ -1,61 +1,57 @@
 package com.fatserver.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * Created by Victor on 07.02.2018.
  */
+@Entity
 public class Message {
 
-    private int id;
-    private String from;
-    private String subject;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JsonBackReference
+    private User from;
+
+    @ManyToOne
+    @JsonManagedReference
+    private Contact contact;
+
     private String message;
-    private String timestamp;
-    private String picture;
-    private boolean isImportant;
+
+    private Timestamp timestamp;
+
     private boolean isRead;
+
     private int color = -1;
 
     public Message() {
     }
 
-    public Message(int id,
-                   String from,
-                   String subject,
-                   String message,
-                   String timestamp,
-                   String picture,
-                   boolean isImportant,
-                   boolean isRead){
-        this.id = id;
-        this.from = from;
-        this.subject = subject;
-        this.message = message;
-        this.timestamp = timestamp;
-        this.picture = picture;
-        this.isImportant = isImportant;
-        this.isRead = isRead;
-    }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getFrom() {
+    public User getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(User from) {
         this.from = from;
     }
+
 
     public String getMessage() {
         return message;
@@ -65,28 +61,12 @@ public class Message {
         this.message = message;
     }
 
-    public String getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
-    }
-
-    public boolean isImportant() {
-        return isImportant;
-    }
-
-    public void setImportant(boolean important) {
-        isImportant = important;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
     public boolean isRead() {
@@ -105,17 +85,11 @@ public class Message {
         this.color = color;
     }
 
-    public String getSubject() {
-        return subject;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setSubject(String subject) {
-        this.subject = subject;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
-
-
-
-
-
-
 }

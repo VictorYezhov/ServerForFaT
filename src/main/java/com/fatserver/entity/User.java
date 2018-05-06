@@ -71,6 +71,13 @@ public class User implements Serializable {
     @JsonManagedReference
     private List<Contact> MeInСontact;
 
+    @OneToMany(mappedBy = "from", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Message> myMessages;
+
+
+
+
 
     public User() {
         skills = new HashSet<>();

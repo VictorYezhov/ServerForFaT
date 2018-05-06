@@ -1,10 +1,18 @@
 package com.fatserver.controlller;
 
 
+import com.fatserver.dao.MessageDao;
+import com.fatserver.entity.Contact;
 import com.fatserver.entity.Message;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.fatserver.entity.User;
+import com.fatserver.sendingForms.ContactDTO;
+import com.fatserver.sendingForms.MessageDTO;
+import com.fatserver.service.ContactService;
+import com.fatserver.service.MessageService;
+import com.fatserver.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,28 +22,57 @@ import java.util.List;
 @RestController
 public class MessageController {
 
-    private List<Message> messages =  new ArrayList<>();
+    @Autowired
+    private MessageService messageService;
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ContactService contactService;
 
     //TODO messaging service between users
-    @RequestMapping(value = "/getMessages", method= RequestMethod.GET)
-    public List<Message> greeting() {
-        messages.clear();
+    @RequestMapping(value = "/getMessages{id}", method= RequestMethod.GET)
+    public List<MessageDTO> greeting(@PathVariable("id") Long id) {
+        System.out.println("GET MESSAGES REQUESt");
+        List<Message> messages = messageService.findAllByContact(contactService.findOne(id));
 
-        addData();
-        System.out.println("REQUEST!!!!!!!!!!!!!!!!!!");
-        return messages;
+        List<MessageDTO> mDTOS = new ArrayList<>();
+
+       // MessageDTO message;
+        for(Message c: messages){
+           // message = new MessageDTO(c);
+            mDTOS.add(new MessageDTO(c));
+        }
+        return mDTOS;
     }
 
-    private void addData(){
-        messages.add(new Message(1, "Victor Yezhov","Find a tutor", "hello_2", "9:07", "xcvxc", true, false));
-        messages.add(new Message(2, "Vasiliy Goh","Find a tutor", "hello_3", "9:07", "xcvxc", true, false));
-        messages.add(new Message(3, "Misha Yaponchik","Kill", "hello_4", "10:07", "xcvxc", true, false));
-        messages.add(new Message(4, "Oles Dobosevych","Lerning", "hello_5", "11:07", "xcvxc", true, false));
-        messages.add(new Message(5, "Sofia Rak","Logic", "hello_6", "12:07", "xcvxc", true, false));
-        messages.add(new Message(6, "Arsen Graz","Smoking", "hello_7", "13:07", "xcvxc", true, false));
-        messages.add(new Message(7, "Sasha Sharomov","AGROO", "hello_8", "14:07", "xcvxc", true, false));
-        messages.add(new Message(8, "Tolik Nod","Pidr", "hello_9", "15:07", "xcvxc", true, false));
+    @PostMapping(value = "/getMyContacts")
+    public List<ContactDTO> getContactsOfUser(@RequestParam("id") Long id){
+
+        User requester = userService.findOne(id);
+        List<Contact> contacts = contactService.findContactForUser(requester);
+
+        List<ContactDTO> contactDTOS = new ArrayList<>();
+        for(Contact c: contacts){
+            contactDTOS.add(new ContactDTO(c, findUserFrom(requester,c)));
+        }
+
+        return contactDTOS;
+
     }
+
+
+    private User findUserFrom(User requester, Contact contact){
+        if(requester.getId().equals(contact.getSide1().getId())){
+            return contact.getSide2();
+        }else {
+            return contact.getSide1();
+        }
+    }
+
+
+
+
 
 
 
