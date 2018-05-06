@@ -25,7 +25,7 @@ public class RegistrationForm {
     private int rating;
     private String address;
     private String mobileNumber;
-    private IncomingCity city;
+    private CityDTO city;
 
 
     public RegistrationForm() {
@@ -96,11 +96,11 @@ public class RegistrationForm {
         this.rating = rating;
     }
 
-    public IncomingCity getCity() {
+    public CityDTO getCity() {
         return city;
     }
 
-    public void setCity(IncomingCity city) {
+    public void setCity(CityDTO city) {
         this.city = city;
     }
 }

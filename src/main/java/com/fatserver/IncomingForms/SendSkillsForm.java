@@ -10,22 +10,22 @@ import java.util.List;
  */
 public class SendSkillsForm {
 
-    private List<IncomingSkill> skills;
+    private List<SkillDTO> skills;
     private Long userId;
 
     public SendSkillsForm() {
     }
 
-    public SendSkillsForm(List<IncomingSkill> skills, Long userId) {
+    public SendSkillsForm(List<SkillDTO> skills, Long userId) {
         this.skills = skills;
         this.userId = userId;
     }
 
-    public List<IncomingSkill> getSkills() {
+    public List<SkillDTO> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<IncomingSkill> skills) {
+    public void setSkills(List<SkillDTO> skills) {
         this.skills = skills;
     }
 
