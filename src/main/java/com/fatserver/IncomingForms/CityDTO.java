@@ -3,10 +3,10 @@ package com.fatserver.IncomingForms;
 /**
  * Created by Victor on 17.04.2018.
  */
-public class IncomingCity {
+public class CityDTO {
 
     private Long id;
-    private IncomingCountry country;
+    private CountryDTO country;
     private String name;
 
     public Long getId() {
@@ -17,20 +17,20 @@ public class IncomingCity {
         this.id = id;
     }
 
-    public IncomingCountry getCountry() {
+    public CountryDTO getCountry() {
         return country;
     }
 
-    public void setCountry(IncomingCountry country) {
+    public void setCountry(CountryDTO country) {
         this.country = country;
     }
 
-    public IncomingCountry getIncomingCountry() {
+    public CountryDTO getIncomingCountry() {
         return country;
     }
 
-    public void setIncomingCountry(IncomingCountry incomingCountry) {
-        this.country = incomingCountry;
+    public void setIncomingCountry(CountryDTO countryDTO) {
+        this.country = countryDTO;
     }
 
     public String getName() {

@@ -1,37 +1,31 @@
 package com.fatserver.IncomingForms;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fatserver.entity.Skill;
-
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.Set;
 
-public class IncomingQuestion {
+public class QuestionDTO {
     private Long id;
     private String title;
     private String discription;
     private Integer price;
     private Timestamp dateTime;
-    private Set<IncomingSkill> skills;
+    private Set<SkillDTO> skills;
 
 
-    public IncomingQuestion(){
+    public QuestionDTO(){
         this.id = null;
         this.title = "Title";
         this.dateTime = getDateTime();
     }
 
-    public IncomingQuestion(String title, String discription, Set<IncomingSkill> skills, Integer price) {
+    public QuestionDTO(String title, String discription, Set<SkillDTO> skills, Integer price) {
         this.title = title;
         this.discription = discription;
         this.skills = skills;
         this.price = price;
     }
 
-    public IncomingQuestion(String title, String discription) {
+    public QuestionDTO(String title, String discription) {
         this.title = title;
         this.discription = discription;
     }
@@ -63,11 +57,11 @@ public class IncomingQuestion {
 
 
 
-    public Set<IncomingSkill> getSkills() {
+    public Set<SkillDTO> getSkills() {
         return skills;
     }
 
-    public void setSkills(Set<IncomingSkill> skills) {
+    public void setSkills(Set<SkillDTO> skills) {
         this.skills = skills;
     }
 

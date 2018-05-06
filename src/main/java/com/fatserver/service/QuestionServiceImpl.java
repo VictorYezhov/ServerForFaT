@@ -2,16 +2,12 @@ package com.fatserver.service;
 
 import com.fatserver.dao.QuestionDao;
 import com.fatserver.entity.Question;
-import com.fatserver.entity.User;
-import com.fatserver.sendingForms.QuestionForm;
-import org.json.simple.JSONObject;
+import com.fatserver.sendingForms.QuestionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Victor on 19.02.2018.
@@ -29,13 +25,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionForm> findAll() {
+    public List<QuestionDTO> findAll() {
         List<Question> questions =  questionDao.findAll();
-        List<QuestionForm> forms = new ArrayList<>();
+        List<QuestionDTO> forms = new ArrayList<>();
 
-        QuestionForm qf;
+        QuestionDTO qf;
         for (Question q: questions ) {
-            qf = new QuestionForm();
+            qf = new QuestionDTO();
             qf.setQuestion(q);
             qf.setUserId(q.getUser().getId());
             qf.setUserName(q.getUser().getName());

@@ -5,25 +5,25 @@ import com.fatserver.entity.Type;
 /**
  * Class represents job that client side appilication send to server
  */
-public class JobForm {
+public class JobDTO {
     private Long id;
     private String name;
     private Type type;
     private String description;
 
-    public JobForm() {
+    public JobDTO() {
     }
 
-    public JobForm(String name) {
+    public JobDTO(String name) {
         this.name = name;
     }
 
-    public JobForm(String name, Type type) {
+    public JobDTO(String name, Type type) {
         this.name = name;
         this.type = type;
     }
 
-    public JobForm(String name, Type type, String description) {
+    public JobDTO(String name, Type type, String description) {
         this.name = name;
         this.type = type;
         this.description = description;

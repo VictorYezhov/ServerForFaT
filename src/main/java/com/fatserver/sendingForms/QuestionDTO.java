@@ -8,7 +8,7 @@ import java.security.PrivateKey;
  * Created by Victor on 06.03.2018.
  * Container for sending information about question
  */
-public class QuestionForm {
+public class QuestionDTO {
 
     private Question question;
     private Long userId;

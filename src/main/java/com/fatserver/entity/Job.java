@@ -1,7 +1,7 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fatserver.IncomingForms.JobForm;
+import com.fatserver.IncomingForms.JobDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -38,7 +38,7 @@ public class Job implements Serializable {
     private Set<User> userListJob;
 
 
-    public Job(JobForm j){
+    public Job(JobDTO j){
         this.name = j.getName();
         this.type = j.getType();
         userListJob = new HashSet<>();

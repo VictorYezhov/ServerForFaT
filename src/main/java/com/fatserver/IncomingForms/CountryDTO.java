@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Victor on 17.04.2018.
  */
-public class IncomingCountry {
+public class CountryDTO {
 
     private Long id;
     private String name;

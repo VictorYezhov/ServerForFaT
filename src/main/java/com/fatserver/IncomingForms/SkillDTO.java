@@ -4,21 +4,21 @@ package com.fatserver.IncomingForms;
  * Created by Victor on 17.02.2018.
  * Class represents skill that client side appilication send to server
  */
-public class IncomingSkill {
+public class SkillDTO {
 
     private Long id;
     private  String name;
 
 
-    public IncomingSkill() {
+    public SkillDTO() {
 
     }
 
-    public IncomingSkill(String name) {
+    public SkillDTO(String name) {
         this.name = name;
     }
 
-    public IncomingSkill(Long id, String name) {
+    public SkillDTO(Long id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -1,7 +1,7 @@
 package com.fatserver.controlller;
 
 
-import com.fatserver.IncomingForms.IncomingSkill;
+import com.fatserver.IncomingForms.SkillDTO;
 import com.fatserver.IncomingForms.SendSkillsForm;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Victor on 17.02.2018.
@@ -46,7 +45,7 @@ public class SkillController {
         User user = userService.findOne(skills.getUserId());
         Skill skill;
         System.out.println("SKILLS: ");
-        for (IncomingSkill s:
+        for (SkillDTO s:
              skills.getSkills()) {
             System.out.println(s.getId()+" "+s.getName());
             skill = skillService.findOne(s.getId());

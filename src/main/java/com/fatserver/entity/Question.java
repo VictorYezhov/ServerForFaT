@@ -3,7 +3,7 @@ package com.fatserver.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fatserver.IncomingForms.IncomingQuestion;
+import com.fatserver.IncomingForms.QuestionDTO;
 import com.fatserver.helpers.JsonDateSerializer;
 
 import javax.persistence.*;
@@ -58,11 +58,11 @@ public class Question  implements Serializable {
         this.dateTime = DateTime;
     }
 
-    public Question(IncomingQuestion incomingQuestion){
-        this.title = incomingQuestion.getTitle();
-        this.discription = incomingQuestion.getDiscription();
-        this.dateTime = incomingQuestion.getDateTime();
-        this.price = incomingQuestion.getPrice();
+    public Question(QuestionDTO questionDTO){
+        this.title = questionDTO.getTitle();
+        this.discription = questionDTO.getDiscription();
+        this.dateTime = questionDTO.getDateTime();
+        this.price = questionDTO.getPrice();
         skills = new HashSet<>();
         commentsList = new ArrayList<>();
     }

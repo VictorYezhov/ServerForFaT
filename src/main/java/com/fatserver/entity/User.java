@@ -62,6 +62,16 @@ public class User implements Serializable {
 
 
 
+
+    @OneToMany(mappedBy = "side1", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Contact> myContacts;
+
+    @OneToMany(mappedBy = "side2", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Contact> MeInСontact;
+
+
     public User() {
         skills = new HashSet<>();
         jobs = new HashSet<>();
@@ -188,5 +198,21 @@ public class User implements Serializable {
 
     public void setGcmRegId(String gcmRegId) {
         this.gcmRegId = gcmRegId;
+    }
+
+    public List<Contact> getMyContacts() {
+        return myContacts;
+    }
+
+    public void setMyContacts(List<Contact> myContacts) {
+        this.myContacts = myContacts;
+    }
+
+    public List<Contact> getMeIncontact() {
+        return MeInСontact;
+    }
+
+    public void setMeIncontact(List<Contact> MeInСontact) {
+       this.MeInСontact = MeInСontact;
     }
 }

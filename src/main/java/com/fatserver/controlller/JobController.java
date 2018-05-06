@@ -1,6 +1,6 @@
 package com.fatserver.controlller;
 
-import com.fatserver.IncomingForms.JobForm;
+import com.fatserver.IncomingForms.JobDTO;
 import com.fatserver.entity.Job;
 import com.fatserver.entity.User;
 import com.fatserver.service.JobService;
@@ -43,7 +43,7 @@ public class JobController {
      * @return
      */
     @PostMapping(value = "/sendNewJob{id}")
-    public String updateJobs(@RequestBody JobForm job, @PathVariable Long id){
+    public String updateJobs(@RequestBody JobDTO job, @PathVariable Long id){
         Job j = jobService.findJobByName(job.getName());
         if(j!=null){
             User user = userService.findOne(id);
