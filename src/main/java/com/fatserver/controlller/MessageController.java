@@ -52,9 +52,15 @@ public class MessageController {
         User requester = userService.findOne(id);
         List<Contact> contacts = contactService.findContactForUser(requester);
 
+        Message lastMessage;
+        ContactDTO contactDTO;
         List<ContactDTO> contactDTOS = new ArrayList<>();
         for(Contact c: contacts){
-            contactDTOS.add(new ContactDTO(c, findUserFrom(requester,c)));
+             lastMessage = messageService.findLastMessageForContact(c);
+              contactDTO = new ContactDTO(c, findUserFrom(requester,c));
+              contactDTO.setLastMessageText(lastMessage.getMessage());
+              contactDTO.setTimestamp(lastMessage.getTimestamp());
+            contactDTOS.add(contactDTO);
         }
 
         return contactDTOS;

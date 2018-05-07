@@ -1,8 +1,12 @@
 package com.fatserver.sendingForms;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fatserver.entity.Contact;
 import com.fatserver.entity.User;
+import com.fatserver.helpers.JsonDateSerializer;
+
+import java.sql.Timestamp;
 
 /**
  * Created by Victor on 06.05.2018.
@@ -12,6 +16,9 @@ public class ContactDTO {
     private Long  id;
     private String from;
     private Long idFrom;
+    @JsonSerialize(using = JsonDateSerializer.class)
+    private Timestamp timestamp;
+    private String lastMessageText;
 
     public ContactDTO(Contact contact, User userfrom) {
         id =  contact.getId();
@@ -42,5 +49,21 @@ public class ContactDTO {
 
     public void setIdFrom(Long idFrom) {
         this.idFrom = idFrom;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getLastMessageText() {
+        return lastMessageText;
+    }
+
+    public void setLastMessageText(String lastMessageText) {
+        this.lastMessageText = lastMessageText;
     }
 }

@@ -47,4 +47,9 @@ public class MessageServiceImpl implements MessageService {
     public List<Message> findAllByContact(Contact contact) {
         return messageDao.findAllByContact(contact);
     }
+
+    @Override
+    public Message findLastMessageForContact(Contact contact) {
+        return messageDao.findDistinctByContactOrderByTimestamp(contact.getId());
+    }
 }

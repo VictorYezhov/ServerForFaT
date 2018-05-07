@@ -23,6 +23,8 @@ public interface MessageService {
 
     List<Message> findAllByContact(Contact contact);
 
+    Message findLastMessageForContact(Contact contact);
+
 
 
 
