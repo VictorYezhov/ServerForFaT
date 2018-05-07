@@ -6,6 +6,7 @@ import com.fatserver.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -47,5 +48,10 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public List<Contact> findContactForUser(User user) {
         return contactDao.findContactsForUser(user);
+    }
+
+    @Override
+    public BigInteger checkIfContactExists(Long side1, Long side2) {
+        return contactDao.checkIfContactExists(side1, side2).add(contactDao.checkIfContactExists(side2, side1));
     }
 }

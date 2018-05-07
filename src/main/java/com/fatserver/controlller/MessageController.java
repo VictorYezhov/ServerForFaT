@@ -13,6 +13,7 @@ import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class MessageController {
     private UserService userService;
     @Autowired
     private ContactService contactService;
+
+    private BigInteger b = new BigInteger("1");
 
     //TODO messaging service between users
     @RequestMapping(value = "/getMessages{id}", method= RequestMethod.GET)
@@ -65,6 +68,22 @@ public class MessageController {
 
         return contactDTOS;
 
+    }
+
+    @PostMapping("/createNewChat")
+    public String createNewChat(@RequestParam("side1") Long side1, @RequestParam("side2") Long side2){
+        if(contactService.checkIfContactExists(side1,side2).equals(b)){
+            return "OK";
+
+        }
+
+        Contact newContact = new Contact();
+        newContact.setSide1(userService.findOne(side1));
+        newContact.setSide2(userService.findOne(side2));
+        contactService.save(newContact);
+
+
+        return "OK";
     }
 
 

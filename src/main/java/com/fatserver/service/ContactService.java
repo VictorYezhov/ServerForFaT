@@ -4,6 +4,7 @@ import com.fatserver.entity.Contact;
 import com.fatserver.entity.Country;
 import com.fatserver.entity.User;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -22,6 +23,8 @@ public interface ContactService {
     void update(Contact contact);
 
     List<Contact> findContactForUser(User user);
+
+    BigInteger checkIfContactExists(Long side1, Long side2);
 
 
 
