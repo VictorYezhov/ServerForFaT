@@ -9,6 +9,7 @@ import com.fatserver.sendingForms.ContactDTO;
 import com.fatserver.sendingForms.MessageDTO;
 import com.fatserver.service.ContactService;
 import com.fatserver.service.MessageService;
+import com.fatserver.service.NotificationSender;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,23 +33,57 @@ public class MessageController {
     @Autowired
     private ContactService contactService;
 
-    private BigInteger b = new BigInteger("1");
+    private BigInteger  b = new BigInteger("1");
+    private NotificationSender notificationSender;
+
+
+    public MessageController(NotificationSender notificationSender) {
+        this.notificationSender = notificationSender;
+    }
 
     //TODO messaging service between users
     @RequestMapping(value = "/getMessages{id}", method= RequestMethod.POST)
-    public List<MessageDTO> greeting(@PathVariable("id") Long id) {
+    public List<MessageDTO> greeting(@PathVariable("id") Long id, @RequestParam("userId") Long requester) {
         System.out.println("GET MESSAGES REQUESt");
-        List<Message> messages = messageService.findAllByContact(contactService.findOne(id));
+        Contact contact = contactService.findOne(id);
+        List<Message> messages = messageService.findAllByContact(contact);
 
+
+
+        System.out.println(messages.size());
         List<MessageDTO> mDTOS = new ArrayList<>();
-
        // MessageDTO message;
         for(Message c: messages){
            // message = new MessageDTO(c);
+            if(c.getFrom().getId().equals(requester))
+                continue;
+            c.setRead(true);
             mDTOS.add(new MessageDTO(c));
+            messageService.update(c);
         }
         return mDTOS;
     }
+
+    @RequestMapping(value = "/getAllMessages{id}", method= RequestMethod.POST)
+    public List<MessageDTO> getAllMessages(@PathVariable("id") Long id,@RequestParam("userId") Long requester) {
+
+        List<Message> messages = messageService.findAllForContact(contactService.findOne(id));
+        System.out.println(messages.size());
+        List<MessageDTO> mDTOS = new ArrayList<>();
+        // MessageDTO message;
+        for(Message c: messages){
+            // message = new MessageDTO(c);
+            if(c.getFrom().getId().equals(requester))
+                continue;
+            c.setRead(true);
+            mDTOS.add(new MessageDTO(c));
+            messageService.update(c);
+        }
+        return mDTOS;
+    }
+
+
+
 
     @PostMapping(value = "/getMyContacts")
     public List<ContactDTO> getContactsOfUser(@RequestParam("id") Long id){
@@ -74,6 +109,33 @@ public class MessageController {
 
         return contactDTOS;
 
+    }
+
+    @PostMapping("/sendMessage")
+    public String acceptMessage(@RequestBody MessageDTO messageDTO){
+
+
+        Contact contact = contactService.findOne(messageDTO.getContactId());
+        User sender = userService.findOne(messageDTO.getFrom());
+        Message message = new Message();
+        message.setFrom(sender);
+        message.setContact(contact);
+        message.setColor(0);
+        message.setMessage(messageDTO.getMessage());
+        message.setRead(false);
+        message.setTimestamp(new Timestamp(System.currentTimeMillis()));
+        messageService.save(message);
+
+        User getter;
+        if(sender.getId() == contact.getSide1().getId()){
+            getter = contact.getSide2();
+        }else {
+            getter = contact.getSide1();
+        }
+        notificationSender.sendNotification(contact, getter);
+
+
+        return "OK";
     }
 
     @PostMapping("/createNewChat")

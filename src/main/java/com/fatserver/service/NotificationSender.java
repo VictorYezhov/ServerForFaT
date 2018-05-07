@@ -1,5 +1,6 @@
 package com.fatserver.service;
 
+import com.fatserver.entity.Contact;
 import com.fatserver.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,12 @@ public class NotificationSender {
         this.fcmService = fcmService;
     }
 
-    public void sendNotification(User userFrom, User userTo){
+    public void sendNotification(Contact contact, User userTo){
 
 
 
         try {
-            this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), userFrom.getId().toString());
+            this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), contact.getId().toString());
         }
         catch (InterruptedException | ExecutionException e) {
             System.err.println("send personal message\n"+ e);

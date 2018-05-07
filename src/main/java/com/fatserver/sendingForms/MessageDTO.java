@@ -1,6 +1,7 @@
 package com.fatserver.sendingForms;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fatserver.entity.Contact;
@@ -24,11 +25,14 @@ public class MessageDTO {
     private Long id;
     private Long from;
     private String message;
-    @JsonSerialize(using = JsonDateSerializer.class)
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Timestamp timestamp;
     private Long contactId;
     private boolean isRead;
     private int color;
+
+    public MessageDTO() {
+    }
 
     public MessageDTO(Message message) {
         id = message.getId();

@@ -80,9 +80,10 @@ public class GreetingController {
             mDTOS.add(new MessageDTO(c));
         }
 
-//        User usetTo = userServices.findOne(1L);
-//        User userFrom = userServices.findOne(2L);
-//        notificationSender.sendNotification(userFrom,usetTo);
+        User usetTo = userServices.findOne(1L);
+        User userFrom = userServices.findOne(4L);
+        Contact contact =  contactService.findContactBySides(usetTo.getId(), userFrom.getId());
+        notificationSender.sendNotification(contact,usetTo);
 
 
         return mDTOS;
