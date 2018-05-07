@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Victor on 17.02.2018.
@@ -58,6 +59,27 @@ public class SkillController {
             System.out.println(s.getName()+" "+ s.getId());
         }
         userService.update(user);
+        return "OK";
+    }
+
+    @PostMapping(value = "/deleteItemFromChipList{id}")
+    public  String deleteAccountChip(@RequestBody Long user_id, @PathVariable Long id){
+        User user = userService.findOne(user_id);
+        Set<Skill> user_skill_list = user.getSkills();
+        Skill skill = skillService.findOne(id);
+
+        //----------WHY??????--------------
+        System.out.println(skill.getName() + " " + skill.getId());
+
+
+        user_skill_list.remove(skill);
+        user.setSkills(user_skill_list);
+        userService.update(user);
+
+        Set<User> skill_users_list = skill.getUserList();
+        skill_users_list.remove(user);
+        skill.setUserList(skill_users_list);
+        skillService.update(skill);
         return "OK";
     }
 
