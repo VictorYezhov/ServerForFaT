@@ -21,4 +21,8 @@ public interface ContactDao extends JpaRepository<Contact, Long> {
 
     @Query(value = "SELECT EXISTS(SELECT * FROM contact WHERE side1_id=:side1 and side2_id =:side2)", nativeQuery = true)
     BigInteger checkIfContactExists(@Param("side1") Long side1, @Param("side2") Long side2);
+
+
+    @Query(value = "SELECT * FROM contact WHERE (side1_id=:side1 and side2_id =:side2) or (side1_id=:side2 and side2_id =:side1)", nativeQuery = true)
+    Contact findContactBySides(@Param("side1") Long side1, @Param("side2") Long side2);
 }
