@@ -54,4 +54,9 @@ public class ContactServiceImpl implements ContactService {
     public BigInteger checkIfContactExists(Long side1, Long side2) {
         return contactDao.checkIfContactExists(side1, side2).add(contactDao.checkIfContactExists(side2, side1));
     }
+
+    @Override
+    public Contact findContactBySides(Long side1, Long side2) {
+        return contactDao.findContactBySides(side1, side2);
+    }
 }

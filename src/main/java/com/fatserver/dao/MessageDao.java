@@ -15,8 +15,8 @@ public interface MessageDao extends JpaRepository<Message, Long> {
 
     List<Message> findAllByContact(Contact contact);
 
-    @Query(value = "select * from message where message.timestamp =" +
-            "(select max(res.timestamp) as maximum from (select  * from findatutor.message where message.contact_id =:contactID)as res) and contact_id =:contactID",
+    @Query(value = "select DISTINCT * from message where message.timestamp =" +
+            "(select max(res.timestamp) as maximum from (select  * from findatutor.message where message.contact_id =:contactID)as res) and contact_id =:contactID LIMIT 1",
             nativeQuery = true)
     Message findDistinctByContactOrderByTimestamp(@Param("contactID") Long contactID);
 

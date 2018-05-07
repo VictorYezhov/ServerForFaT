@@ -35,7 +35,7 @@ public class MessageController {
     private BigInteger b = new BigInteger("1");
 
     //TODO messaging service between users
-    @RequestMapping(value = "/getMessages{id}", method= RequestMethod.GET)
+    @RequestMapping(value = "/getMessages{id}", method= RequestMethod.POST)
     public List<MessageDTO> greeting(@PathVariable("id") Long id) {
         System.out.println("GET MESSAGES REQUESt");
         List<Message> messages = messageService.findAllByContact(contactService.findOne(id));
@@ -79,8 +79,7 @@ public class MessageController {
     @PostMapping("/createNewChat")
     public String createNewChat(@RequestParam("side1") Long side1, @RequestParam("side2") Long side2){
         if(contactService.checkIfContactExists(side1,side2).equals(b)){
-            return "OK";
-
+            return String.valueOf(contactService.findContactBySides(side1,side2).getId());
         }
 
         Contact newContact = new Contact();
@@ -88,8 +87,7 @@ public class MessageController {
         newContact.setSide2(userService.findOne(side2));
         contactService.save(newContact);
 
-
-        return "OK";
+        return String.valueOf(contactService.findContactBySides(side1,side2).getId());
     }
 
 

@@ -26,6 +26,8 @@ public interface ContactService {
 
     BigInteger checkIfContactExists(Long side1, Long side2);
 
+    Contact findContactBySides(Long side1, Long side2);
+
 
 
 
