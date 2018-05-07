@@ -68,9 +68,6 @@ public class SkillController {
         Set<Skill> user_skill_list = user.getSkills();
         Skill skill = skillService.findOne(id);
 
-        //----------WHY??????--------------
-        System.out.println(skill.getName() + " " + skill.getId());
-
 
         user_skill_list.remove(skill);
         user.setSkills(user_skill_list);

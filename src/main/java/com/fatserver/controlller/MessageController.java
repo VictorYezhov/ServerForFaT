@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,9 +61,14 @@ public class MessageController {
         List<ContactDTO> contactDTOS = new ArrayList<>();
         for(Contact c: contacts){
              lastMessage = messageService.findLastMessageForContact(c);
-              contactDTO = new ContactDTO(c, findUserFrom(requester,c));
-              contactDTO.setLastMessageText(lastMessage.getMessage());
-              contactDTO.setTimestamp(lastMessage.getTimestamp());
+            contactDTO = new ContactDTO(c, findUserFrom(requester, c));
+             if(lastMessage!=null) {
+                 contactDTO.setLastMessageText(lastMessage.getMessage());
+                 contactDTO.setTimestamp(lastMessage.getTimestamp());
+             }else {
+                 contactDTO.setLastMessageText("start conversation");
+                 contactDTO.setTimestamp(new Timestamp(System.currentTimeMillis()));
+             }
             contactDTOS.add(contactDTO);
         }
 
