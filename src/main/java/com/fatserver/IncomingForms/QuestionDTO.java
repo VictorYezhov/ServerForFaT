@@ -30,6 +30,14 @@ public class QuestionDTO {
         this.discription = discription;
     }
 
+    public QuestionDTO(Long id, String title, String discription, Integer price, Timestamp dateTime, Set<SkillDTO> skills) {
+        this.id = id;
+        this.title = title;
+        this.discription = discription;
+        this.price = price;
+        this.dateTime = dateTime;
+        this.skills = skills;
+    }
 
     public Long getId() {
         return id;

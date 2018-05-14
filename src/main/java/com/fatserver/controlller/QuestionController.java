@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Victor on 06.03.2018.
@@ -29,6 +31,7 @@ public class QuestionController {
 
     @Autowired
     UserService userService;
+
     @Autowired
     SkillService skillService;
 
@@ -51,7 +54,6 @@ public class QuestionController {
 
     @PostMapping(value = "/sendAskingQuestion{id}")
     public String askQuestion(@RequestBody com.fatserver.IncomingForms.QuestionDTO question, @PathVariable Long id){
-        System.out.println("Question: " + question.getTitle());
         Question questionToSave = new Question(question);
         User user = userService.findOne(id);
         Skill skill = null;
@@ -69,5 +71,23 @@ public class QuestionController {
 
 
         return "OK";
+    }
+
+    @GetMapping(value = "/getAllUsersQuestions{id}")
+    public List<Question> sendToClientAllUsersQuestions(@PathVariable Long id){
+        System.out.println(id);
+        List<QuestionDTO> questionForms = questionService.findAll();
+        List<Question> userQuestions = new ArrayList<>();
+
+
+        for (QuestionDTO questionForm: questionForms){
+            if(questionForm.getUserId().equals(id)){
+
+                userQuestions.add(questionForm.getQuestion());
+                System.out.println(questionForm.getQuestion().getTitle());
+            }
+        }
+
+        return userQuestions;
     }
 }
