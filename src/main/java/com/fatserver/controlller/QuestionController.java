@@ -1,11 +1,14 @@
 package com.fatserver.controlller;
 
+import com.fatserver.IncomingForms.CategotryDTO;
 import com.fatserver.IncomingForms.SkillDTO;
 import com.fatserver.comparators.DateComparator;
+import com.fatserver.entity.Category;
 import com.fatserver.entity.Question;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
 import com.fatserver.sendingForms.QuestionDTO;
+import com.fatserver.service.CategotyService;
 import com.fatserver.service.QuestionService;
 import com.fatserver.service.SkillService;
 import com.fatserver.service.UserService;
@@ -34,6 +37,10 @@ public class QuestionController {
 
     @Autowired
     SkillService skillService;
+
+    @Autowired
+    CategotyService categotyService;
+
 
 
     /**
@@ -65,7 +72,10 @@ public class QuestionController {
 
     @PostMapping(value = "/sendAskingQuestion{id}")
     public String askQuestion(@RequestBody com.fatserver.IncomingForms.QuestionDTO question, @PathVariable Long id){
+
         Question questionToSave = new Question(question);
+        Category category = categotyService.findOne(question.getCategotryDTO().getId());
+        questionToSave.setCategory(category);
         User user = userService.findOne(id);
         Skill skill = null;
         for (SkillDTO s:question.getSkills()) {

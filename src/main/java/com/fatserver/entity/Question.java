@@ -75,9 +75,6 @@ public class Question  implements Serializable {
         skills = new HashSet<>();
         commentsList = new ArrayList<>();
         this.views = questionDTO.getViews();
-        this.category = new Category();
-        this.category.setId(questionDTO.getCategotryDTO().getId());
-        this.category.setName(questionDTO.getCategotryDTO().getName());
     }
 
 
@@ -162,6 +159,14 @@ public class Question  implements Serializable {
 
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
