@@ -10,6 +10,7 @@ public class QuestionDTO {
     private Integer price;
     private Timestamp dateTime;
     private Set<SkillDTO> skills;
+    private Integer views;
 
 
     public QuestionDTO(){
@@ -87,6 +88,14 @@ public class QuestionDTO {
 
     public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
     }
 
     @Override

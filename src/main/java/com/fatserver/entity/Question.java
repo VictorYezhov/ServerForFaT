@@ -28,6 +28,7 @@ public class Question  implements Serializable {
     private String title;
     private String discription;
     private Integer price;
+    private Integer views;
 
     @JsonSerialize(using = JsonDateSerializer.class)
     private Timestamp dateTime;
@@ -65,6 +66,7 @@ public class Question  implements Serializable {
         this.price = questionDTO.getPrice();
         skills = new HashSet<>();
         commentsList = new ArrayList<>();
+        this.views = questionDTO.getViews();
     }
 
 
@@ -141,6 +143,14 @@ public class Question  implements Serializable {
 
     public void setCommentsList(List<Comment> commentsList) {
         this.commentsList = commentsList;
+    }
+
+    public Integer getViews() {
+        return views;
+    }
+
+    public void setViews(Integer views) {
+        this.views = views;
     }
 
     @Override

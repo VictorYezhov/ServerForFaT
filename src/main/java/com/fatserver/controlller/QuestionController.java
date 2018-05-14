@@ -84,10 +84,19 @@ public class QuestionController {
             if(questionForm.getUserId().equals(id)){
 
                 userQuestions.add(questionForm.getQuestion());
-                System.out.println(questionForm.getQuestion().getTitle());
             }
         }
 
         return userQuestions;
+    }
+
+    @PostMapping(value = "/plusOneToViewCounter{id}")
+    public String plusOneToViewCounter(@PathVariable Long id){
+
+        Question q = questionService.findOne(id);
+        q.setViews(q.getViews() + 1);
+        questionService.update(q);
+
+        return "OK";
     }
 }
