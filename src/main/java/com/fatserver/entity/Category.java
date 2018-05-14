@@ -20,7 +20,7 @@ public class Category {
 
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     @JsonBackReference
-    private List<Skill> skillList;
+    private List<Question> questions;
 
 
     public Category() {
@@ -46,11 +46,11 @@ public class Category {
         this.name = name;
     }
 
-    public List<Skill> getSkillList() {
-        return skillList;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setSkillList(List<Skill> skillList) {
-        this.skillList = skillList;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 }

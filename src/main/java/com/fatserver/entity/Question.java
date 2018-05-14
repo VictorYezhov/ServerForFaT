@@ -34,6 +34,11 @@ public class Question  implements Serializable {
     private Timestamp dateTime;
 
 
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonManagedReference
+    private Category category;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -48,6 +53,9 @@ public class Question  implements Serializable {
     @OneToMany(mappedBy = "question_com", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Comment> commentsList;
+
+
+
 
 
     public Question(String title, String discription, User user, Set<Skill> skills, Integer price, Timestamp DateTime) {

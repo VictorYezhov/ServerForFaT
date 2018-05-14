@@ -43,10 +43,6 @@ public class Skill implements Serializable {
     private Set<Question> questionList;
 
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    @JsonManagedReference
-    private Category category;
 
 
 
@@ -113,11 +109,4 @@ public class Skill implements Serializable {
                 '}';
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-}
+   }

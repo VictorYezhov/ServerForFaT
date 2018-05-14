@@ -52,6 +52,17 @@ public class QuestionController {
         return questionDTOS;
     }
 
+    @GetMapping("/getQuestionsByCategory{id}")
+    public List<QuestionDTO> getQuestionsByCategory(@PathVariable("id") Long id){
+        List<QuestionDTO> questionDTOS = questionService.findAllByCategoty(id);
+        for (QuestionDTO qf:
+                questionDTOS) {
+            qf.getQuestion().setCommentsList(null);
+        }
+        Collections.sort(questionDTOS, new DateComparator());
+        return questionDTOS;
+    }
+
     @PostMapping(value = "/sendAskingQuestion{id}")
     public String askQuestion(@RequestBody com.fatserver.IncomingForms.QuestionDTO question, @PathVariable Long id){
         Question questionToSave = new Question(question);

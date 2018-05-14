@@ -21,4 +21,7 @@ public interface QuestionService {
 
     void update(Question question);
 
+
+    List<QuestionDTO> findAllByCategoty(Long categoryId);
+
 }
