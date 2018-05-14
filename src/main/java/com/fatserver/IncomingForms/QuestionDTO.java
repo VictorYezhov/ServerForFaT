@@ -13,7 +13,7 @@ public class QuestionDTO {
     private Timestamp dateTime;
     private Set<SkillDTO> skills;
     private Integer views;
-    private CategotryDTO categotryDTO;
+    private CategotryDTO category;
 
 
     public QuestionDTO(){
@@ -22,26 +22,7 @@ public class QuestionDTO {
         this.dateTime = getDateTime();
     }
 
-    public QuestionDTO(String title, String discription, Set<SkillDTO> skills, Integer price) {
-        this.title = title;
-        this.discription = discription;
-        this.skills = skills;
-        this.price = price;
-    }
 
-    public QuestionDTO(String title, String discription) {
-        this.title = title;
-        this.discription = discription;
-    }
-
-    public QuestionDTO(Long id, String title, String discription, Integer price, Timestamp dateTime, Set<SkillDTO> skills) {
-        this.id = id;
-        this.title = title;
-        this.discription = discription;
-        this.price = price;
-        this.dateTime = dateTime;
-        this.skills = skills;
-    }
 
     public Long getId() {
         return id;
@@ -66,8 +47,6 @@ public class QuestionDTO {
     public void setDiscription(String discription) {
         this.discription = discription;
     }
-
-
 
     public Set<SkillDTO> getSkills() {
         return skills;
@@ -101,12 +80,12 @@ public class QuestionDTO {
         this.views = views;
     }
 
-    public CategotryDTO getCategotryDTO() {
-        return categotryDTO;
+    public CategotryDTO getCategory() {
+        return category;
     }
 
-    public void setCategotryDTO(CategotryDTO categotryDTO) {
-        this.categotryDTO = categotryDTO;
+    public void setCategory(CategotryDTO categotryDTO) {
+        this.category = categotryDTO;
     }
 
     @Override

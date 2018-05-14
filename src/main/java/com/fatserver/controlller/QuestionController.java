@@ -74,7 +74,8 @@ public class QuestionController {
     public String askQuestion(@RequestBody com.fatserver.IncomingForms.QuestionDTO question, @PathVariable Long id){
 
         Question questionToSave = new Question(question);
-        Category category = categotyService.findOne(question.getCategotryDTO().getId());
+        Long iid = question.getCategory().getId();
+        Category category = categotyService.findOne(iid);
         questionToSave.setCategory(category);
         User user = userService.findOne(id);
         Skill skill = null;
@@ -96,7 +97,6 @@ public class QuestionController {
 
     @GetMapping(value = "/getAllUsersQuestions{id}")
     public List<Question> sendToClientAllUsersQuestions(@PathVariable Long id){
-        System.out.println(id);
         List<QuestionDTO> questionForms = questionService.findAll();
         List<Question> userQuestions = new ArrayList<>();
 
