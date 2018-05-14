@@ -1,5 +1,7 @@
 package com.fatserver.IncomingForms;
 
+import com.fatserver.entity.Category;
+
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -11,6 +13,7 @@ public class QuestionDTO {
     private Timestamp dateTime;
     private Set<SkillDTO> skills;
     private Integer views;
+    private CategotryDTO categotryDTO;
 
 
     public QuestionDTO(){
@@ -96,6 +99,14 @@ public class QuestionDTO {
 
     public void setViews(Integer views) {
         this.views = views;
+    }
+
+    public CategotryDTO getCategotryDTO() {
+        return categotryDTO;
+    }
+
+    public void setCategotryDTO(CategotryDTO categotryDTO) {
+        this.categotryDTO = categotryDTO;
     }
 
     @Override
