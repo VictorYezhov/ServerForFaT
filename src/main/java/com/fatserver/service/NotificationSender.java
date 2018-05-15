@@ -22,17 +22,11 @@ public class NotificationSender {
 
     public void sendNotification(Contact contact, User userTo){
 
-
-
         try {
             this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), contact.getId().toString());
         }
         catch (InterruptedException | ExecutionException e) {
             System.err.println("send personal message\n"+ e);
         }
-
-
-
-
     }
 }

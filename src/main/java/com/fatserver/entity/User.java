@@ -76,6 +76,13 @@ public class User implements Serializable {
     private List<Message> myMessages;
 
 
+    @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY)
+    private List<Appointment> meAsEmployer;
+
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    private List<Appointment> meAsEmpoyee;
+
+
 
 
 
@@ -221,5 +228,22 @@ public class User implements Serializable {
 
     public void setMeIncontact(List<Contact> MeInСontact) {
        this.MeInСontact = MeInСontact;
+    }
+
+
+    public List<Contact> getMeInСontact() {
+        return MeInСontact;
+    }
+
+    public void setMeInСontact(List<Contact> meInСontact) {
+        MeInСontact = meInСontact;
+    }
+
+    public List<Message> getMyMessages() {
+        return myMessages;
+    }
+
+    public void setMyMessages(List<Message> myMessages) {
+        this.myMessages = myMessages;
     }
 }
