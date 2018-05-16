@@ -1,16 +1,12 @@
 package com.fatserver.controlller;
 
-import com.fatserver.IncomingForms.LoginForm;
-import com.fatserver.IncomingForms.RegistrationForm;
-import com.fatserver.IncomingForms.UserInformationForm;
-import com.fatserver.entity.City;
-import com.fatserver.entity.Country;
-import com.fatserver.entity.Skill;
-import com.fatserver.entity.User;
+import com.fatserver.IncomingForms.*;
+import com.fatserver.entity.*;
 import com.fatserver.helpers.ImageLoader;
 import com.fatserver.helpers.ImageSaver;
 import com.fatserver.service.CityService;
 import com.fatserver.service.CountryService;
+import com.fatserver.service.ReviewService;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -21,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -37,6 +35,9 @@ public class UserController {
     private CityService cityService;
     @Autowired
     private CountryService countryService;
+
+    @Autowired
+    private ReviewService reviewService;
 
 
     /**
@@ -218,6 +219,36 @@ public class UserController {
         userService.update(user);
 
         return "OK";
+    }
+
+
+
+    @GetMapping("/getReviews{id}")
+    public List<ReviewDTO> getReviewsForUser(@PathVariable("id") Long id){
+
+        List<Review> reviews = reviewService.findAllReviewAboutUser(userService.findOne(id));
+
+        List<ReviewDTO> reviewDTOS = new ArrayList<>();
+
+        for(Review r: reviews){
+            reviewDTOS.add(new ReviewDTO(r));
+        }
+        return reviewDTOS;
+    }
+
+    @GetMapping("/getReviewsAndRating{id}")
+    public RatingReviewsDTO getReviewsAndRatingAboutUser(@PathVariable("id") Long id){
+
+        RatingReviewsDTO ratingReviewsDTO = new RatingReviewsDTO();
+
+        User user = userService.findOne(id);
+        List<Review> reviews = reviewService.findAllReviewAboutUser(user);
+
+        ratingReviewsDTO.setRating(user.getRating());
+        for(Review r: reviews){
+            ratingReviewsDTO.getReviews().add(new ReviewDTO(r));
+        }
+        return ratingReviewsDTO;
     }
 
 

@@ -1,9 +1,6 @@
 package com.fatserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fatserver.IncomingForms.RegistrationForm;
 
 import javax.persistence.*;
@@ -81,6 +78,13 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<Appointment> meAsEmpoyee;
+
+    @OneToMany(mappedBy = "about", fetch = FetchType.LAZY)
+    private List<Review> reviewsAboutUser;
+
+    @OneToMany(mappedBy = "from", fetch = FetchType.LAZY)
+    private List<Review> reviewsFromUser;
+
 
 
 
@@ -245,5 +249,29 @@ public class User implements Serializable {
 
     public void setMyMessages(List<Message> myMessages) {
         this.myMessages = myMessages;
+    }
+
+    public List<Appointment> getMeAsEmployer() {
+        return meAsEmployer;
+    }
+
+    public void setMeAsEmployer(List<Appointment> meAsEmployer) {
+        this.meAsEmployer = meAsEmployer;
+    }
+
+    public List<Appointment> getMeAsEmpoyee() {
+        return meAsEmpoyee;
+    }
+
+    public void setMeAsEmpoyee(List<Appointment> meAsEmpoyee) {
+        this.meAsEmpoyee = meAsEmpoyee;
+    }
+
+    public List<Review> getReviewsAboutUser() {
+        return reviewsAboutUser;
+    }
+
+    public void setReviewsAboutUser(List<Review> reviewsAboutUser) {
+        this.reviewsAboutUser = reviewsAboutUser;
     }
 }
