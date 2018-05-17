@@ -14,6 +14,7 @@ public class AppointmentDTO {
     private Long id;
     private Long employerId;
     private Long employeeId;
+    private Long questionId;
     @JsonSerialize(using = JsonDateSerializer.class)
     private Timestamp timeFor;
     private boolean acceeptedByEmployer;
@@ -26,6 +27,7 @@ public class AppointmentDTO {
         id = appointment.getId();
         employeeId = appointment.getEmployee().getId();
         employerId = appointment.getEmployer().getId();
+        questionId = appointment.getQuestion().getId();
         timeFor = appointment.getTimeFor();
         acceeptedByEmployer = appointment.isAcceeptedByEmployer();
         acceptedByEmployee = appointment.isAcceptedByEmployee();
@@ -104,5 +106,13 @@ public class AppointmentDTO {
 
     public void setSuccessForEmployee(boolean successForEmployee) {
         this.successForEmployee = successForEmployee;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
     }
 }

@@ -2,6 +2,8 @@ package com.fatserver.service;
 
 import com.fatserver.dao.AppointmentDao;
 import com.fatserver.entity.Appointment;
+import com.fatserver.entity.Question;
+import com.fatserver.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,20 @@ public class AppointmentServiceImpl implements AppointmentService {
         appointmentDao.save(appointment);
     }
 
+    /***
+     * Return true if appointment already exists
+     * @param question question for what appointment
+     * @param employee employee
+     * @param employer employer
+     * @return
+     */
+    @Override
+    public boolean checkExistence(Question question, User employee, User employer) {
+        return appointmentDao.findAppointmentByQuestionAndEmployeeAndEmployer(question, employee,employer) != null;
+    }
 
-
+    @Override
+    public Appointment findAppointmentByQuestionAndPeople(Question question, User employee, User employer) {
+        return appointmentDao.findAppointmentByQuestionAndEmployeeAndEmployer(question, employee,employer);
+    }
 }

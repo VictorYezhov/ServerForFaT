@@ -8,16 +8,16 @@ import com.fatserver.entity.Question;
  */
 public class SendQuestionDTO {
 
-    private Question question;
+    private QuestionDTO question;
     private Long userId;
     private String userName;
     private String userSurname;
 
-    public Question getQuestion() {
+    public QuestionDTO getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
+    public void setQuestion(QuestionDTO question) {
         this.question = question;
     }
 

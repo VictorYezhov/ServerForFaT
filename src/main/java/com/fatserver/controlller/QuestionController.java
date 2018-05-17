@@ -1,5 +1,6 @@
 package com.fatserver.controlller;
 
+import com.fatserver.dto.QuestionDTO;
 import com.fatserver.dto.SkillDTO;
 import com.fatserver.comparators.DateComparator;
 import com.fatserver.entity.Category;
@@ -49,10 +50,7 @@ public class QuestionController {
     @GetMapping("/getAllQuestions")//TODO : Filltring and sending only latest questions
     public List<SendQuestionDTO> getAllQuestions(){
         List<SendQuestionDTO> questionDTOS = questionService.findAll();
-        for (SendQuestionDTO qf:
-                questionDTOS) {
-            qf.getQuestion().setCommentsList(null);
-        }
+
         Collections.sort(questionDTOS, new DateComparator());
         return questionDTOS;
     }
@@ -60,10 +58,6 @@ public class QuestionController {
     @GetMapping("/getQuestionsByCategory{id}")
     public List<SendQuestionDTO> getQuestionsByCategory(@PathVariable("id") Long id){
         List<SendQuestionDTO> questionDTOS = questionService.findAllByCategoty(id);
-        for (SendQuestionDTO qf:
-                questionDTOS) {
-            qf.getQuestion().setCommentsList(null);
-        }
         Collections.sort(questionDTOS, new DateComparator());
         return questionDTOS;
     }
@@ -94,9 +88,9 @@ public class QuestionController {
     }
 
     @GetMapping(value = "/getAllUsersQuestions{id}")
-    public List<Question> sendToClientAllUsersQuestions(@PathVariable Long id){
+    public List<QuestionDTO> sendToClientAllUsersQuestions(@PathVariable Long id){
         List<SendQuestionDTO> questionForms = questionService.findAll();
-        List<Question> userQuestions = new ArrayList<>();
+        List<QuestionDTO> userQuestions = new ArrayList<>();
 
 
         for (SendQuestionDTO questionForm: questionForms){

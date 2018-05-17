@@ -2,6 +2,7 @@ package com.fatserver.service;
 
 import com.fatserver.dao.CategoryDao;
 import com.fatserver.dao.QuestionDao;
+import com.fatserver.dto.QuestionDTO;
 import com.fatserver.entity.Question;
 import com.fatserver.dto.SendQuestionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,9 +65,11 @@ public class QuestionServiceImpl implements QuestionService {
     private List<SendQuestionDTO> formDtos(List<Question> questions){
         List<SendQuestionDTO> forms = new ArrayList<>();
         SendQuestionDTO qf;
+        QuestionDTO  questionDTO;
         for (Question q: questions ) {
             qf = new SendQuestionDTO();
-            qf.setQuestion(q);
+            questionDTO = new QuestionDTO(q);
+            qf.setQuestion(questionDTO);
             qf.setUserId(q.getUser().getId());
             qf.setUserName(q.getUser().getName());
             qf.setUserSurname(q.getUser().getFamilyName());

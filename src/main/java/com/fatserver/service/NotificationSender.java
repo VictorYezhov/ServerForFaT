@@ -1,5 +1,6 @@
 package com.fatserver.service;
 
+import com.fatserver.entity.Appointment;
 import com.fatserver.entity.Contact;
 import com.fatserver.entity.User;
 import com.fatserver.network.NotificationType;
@@ -32,9 +33,9 @@ public class NotificationSender {
         }
     }
 
-    public void sendNotificationAboutNewContract(User from, User userTo){
+    public void sendNotificationAboutNewContract(Appointment appointment, User userTo){
         try {
-            this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), from.getId().toString(),
+            this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), appointment.getId().toString(),
                     NotificationType.NEWCONTRACT);
         }
         catch (InterruptedException | ExecutionException e) {

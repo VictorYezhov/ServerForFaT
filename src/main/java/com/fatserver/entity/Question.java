@@ -54,7 +54,8 @@ public class Question  implements Serializable {
     @JsonManagedReference
     private List<Comment> commentsList;
 
-
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY)
+    private List<Appointment>  appointments;
 
 
 
@@ -167,6 +168,15 @@ public class Question  implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
     }
 
     @Override

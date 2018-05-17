@@ -21,6 +21,10 @@ public class Appointment {
     private User employee;
 
 
+    @ManyToOne
+    private Question question;
+
+
     private Timestamp timeFor;
 
     private boolean acceeptedByEmployer;
@@ -102,5 +106,13 @@ public class Appointment {
 
     public void setSuccessForEmployee(boolean successForEmployee) {
         this.successForEmployee = successForEmployee;
+    }
+
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
     }
 }

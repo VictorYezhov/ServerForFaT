@@ -1,6 +1,10 @@
 package com.fatserver.dto;
 
+import com.fatserver.entity.Question;
+import com.fatserver.entity.Skill;
+
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
 public class QuestionDTO {
@@ -18,6 +22,21 @@ public class QuestionDTO {
         this.id = null;
         this.title = "Title";
         this.dateTime = getDateTime();
+    }
+    public QuestionDTO(Question q){
+
+        id = q.getId();
+        title = q.getTitle();
+        discription = q.getDiscription();
+        price = q.getPrice();
+        dateTime = q.getDateTime();
+        skills = new HashSet<>();
+        for(Skill s: q.getSkills()){
+            skills.add(new SkillDTO(s.getId(), s.getName()));
+        }
+
+        views = q.getViews();
+        category = new CategotryDTO(q.getCategory());
     }
 
 
