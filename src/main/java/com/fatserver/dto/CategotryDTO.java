@@ -10,6 +10,10 @@ public class CategotryDTO {
     private Long id;
     private String name;
 
+
+    public CategotryDTO() {
+    }
+
     public CategotryDTO(Category category) {
         id = category.getId();
         name = category.getName();
