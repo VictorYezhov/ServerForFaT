@@ -3,14 +3,17 @@ package com.fatserver.dto;
 public class IdForAppointmentDTO {
     private Long id_employ;
     private Long id_employer;
+    private Long question_id;
 
     public IdForAppointmentDTO() {
     }
 
-    public IdForAppointmentDTO(Long id_employ, Long id_employer) {
+    public IdForAppointmentDTO(Long id_employ, Long id_employer, Long question_id) {
         this.id_employ = id_employ;
         this.id_employer = id_employer;
+        this.question_id = question_id;
     }
+
 
     public Long getId_employ() {
         return id_employ;
@@ -26,5 +29,13 @@ public class IdForAppointmentDTO {
 
     public void setId_employer(Long id_employer) {
         this.id_employer = id_employer;
+    }
+
+    public Long getQuestion_id() {
+        return question_id;
+    }
+
+    public void setQuestion_id(Long question_id) {
+        this.question_id = question_id;
     }
 }
