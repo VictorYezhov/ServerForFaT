@@ -1,10 +1,13 @@
 package com.fatserver.controlller;
 
 import com.fatserver.dto.AppointmentDTO;
+import com.fatserver.dto.IdForAppointmentDTO;
 import com.fatserver.entity.Appointment;
 import com.fatserver.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -29,6 +32,13 @@ public class AppointmentController {
             toSend.add(new AppointmentDTO(a));
         }
         return toSend;
+    }
+
+    @PostMapping(value = "/newAppointment")
+    public String getNewAppointment(@RequestBody IdForAppointmentDTO ifa){
+        System.out.println(ifa.getId_employ());
+        return "Ok";
+
     }
 
 
