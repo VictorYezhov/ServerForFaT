@@ -1,5 +1,6 @@
 package com.fatserver.controlller;
 
+import com.fatserver.dto.CommentDTO;
 import com.fatserver.entity.Comment;
 import com.fatserver.entity.Question;
 import com.fatserver.entity.User;
@@ -43,7 +44,7 @@ public class CommentController {
         for (Comment com: questionService.findOne(Long.decode(id)).getCommentsList()) {
             user = userService.findOne(com.getUserId());
             commentForm = new CommentForm();
-            commentForm.setComment(com);
+            commentForm.setComment(new CommentDTO(com));
             commentForm.setUserName(user.getName());
             commentForm.setUserSurname(user.getFamilyName());
 //            commentForm.setImage(ImageLoader.loadImageFromFileSystem(user.getPathToImage()).getBody());

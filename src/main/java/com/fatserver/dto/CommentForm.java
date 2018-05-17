@@ -7,27 +7,21 @@ import com.fatserver.entity.Comment;
  */
 public class CommentForm {
 
-    private Comment comment;
+    private CommentDTO comment;
     private String userName;
     private String userSurname;
     //byte[] image;
 
 
-    public Comment getComment() {
+    public CommentDTO getComment() {
         return comment;
     }
 
-    public void setComment(Comment comment) {
+    public void setComment(CommentDTO comment) {
         this.comment = comment;
     }
 
-//    public byte[] getImage() {
-//        return image;
-//    }
-//
-//    public void setImage(byte[] image) {
-//        this.image = image;
-//    }
+
 
     public String getUserName() {
         return userName;
