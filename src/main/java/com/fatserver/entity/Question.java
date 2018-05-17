@@ -3,7 +3,7 @@ package com.fatserver.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fatserver.IncomingForms.QuestionDTO;
+import com.fatserver.dto.QuestionDTO;
 import com.fatserver.helpers.JsonDateSerializer;
 
 import javax.persistence.*;

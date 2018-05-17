@@ -1,6 +1,4 @@
-package com.fatserver.IncomingForms;
-
-import com.fatserver.entity.Category;
+package com.fatserver.dto;
 
 import java.sql.Timestamp;
 import java.util.Set;

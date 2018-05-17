@@ -1,12 +1,11 @@
 package com.fatserver.controlller;
 
 
-import com.fatserver.dao.MessageDao;
 import com.fatserver.entity.Contact;
 import com.fatserver.entity.Message;
 import com.fatserver.entity.User;
-import com.fatserver.sendingForms.ContactDTO;
-import com.fatserver.sendingForms.MessageDTO;
+import com.fatserver.dto.ContactDTO;
+import com.fatserver.dto.MessageDTO;
 import com.fatserver.service.ContactService;
 import com.fatserver.service.MessageService;
 import com.fatserver.service.NotificationSender;

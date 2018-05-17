@@ -1,7 +1,7 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fatserver.IncomingForms.RegistrationForm;
+import com.fatserver.dto.RegistrationForm;
 
 import javax.persistence.*;
 import java.io.Serializable;

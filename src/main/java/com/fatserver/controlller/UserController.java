@@ -1,6 +1,6 @@
 package com.fatserver.controlller;
 
-import com.fatserver.IncomingForms.*;
+import com.fatserver.dto.*;
 import com.fatserver.entity.*;
 import com.fatserver.helpers.ImageLoader;
 import com.fatserver.helpers.ImageSaver;
@@ -9,13 +9,10 @@ import com.fatserver.service.CountryService;
 import com.fatserver.service.ReviewService;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.jws.soap.SOAPBinding;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;

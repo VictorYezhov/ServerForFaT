@@ -1,4 +1,4 @@
-package com.fatserver.IncomingForms;
+package com.fatserver.dto;
 
 /**
  * Class will be used as a container to send public user data

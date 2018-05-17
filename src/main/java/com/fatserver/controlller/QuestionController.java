@@ -1,13 +1,12 @@
 package com.fatserver.controlller;
 
-import com.fatserver.IncomingForms.CategotryDTO;
-import com.fatserver.IncomingForms.SkillDTO;
+import com.fatserver.dto.SkillDTO;
 import com.fatserver.comparators.DateComparator;
 import com.fatserver.entity.Category;
 import com.fatserver.entity.Question;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
-import com.fatserver.sendingForms.QuestionDTO;
+import com.fatserver.dto.SendQuestionDTO;
 import com.fatserver.service.CategotyService;
 import com.fatserver.service.QuestionService;
 import com.fatserver.service.SkillService;
@@ -19,7 +18,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Victor on 06.03.2018.
@@ -49,9 +47,9 @@ public class QuestionController {
      */
 
     @GetMapping("/getAllQuestions")//TODO : Filltring and sending only latest questions
-    public List<QuestionDTO> getAllQuestions(){
-        List<QuestionDTO> questionDTOS = questionService.findAll();
-        for (QuestionDTO qf:
+    public List<SendQuestionDTO> getAllQuestions(){
+        List<SendQuestionDTO> questionDTOS = questionService.findAll();
+        for (SendQuestionDTO qf:
                 questionDTOS) {
             qf.getQuestion().setCommentsList(null);
         }
@@ -60,9 +58,9 @@ public class QuestionController {
     }
 
     @GetMapping("/getQuestionsByCategory{id}")
-    public List<QuestionDTO> getQuestionsByCategory(@PathVariable("id") Long id){
-        List<QuestionDTO> questionDTOS = questionService.findAllByCategoty(id);
-        for (QuestionDTO qf:
+    public List<SendQuestionDTO> getQuestionsByCategory(@PathVariable("id") Long id){
+        List<SendQuestionDTO> questionDTOS = questionService.findAllByCategoty(id);
+        for (SendQuestionDTO qf:
                 questionDTOS) {
             qf.getQuestion().setCommentsList(null);
         }
@@ -71,7 +69,7 @@ public class QuestionController {
     }
 
     @PostMapping(value = "/sendAskingQuestion{id}")
-    public String askQuestion(@RequestBody com.fatserver.IncomingForms.QuestionDTO question, @PathVariable Long id){
+    public String askQuestion(@RequestBody com.fatserver.dto.QuestionDTO question, @PathVariable Long id){
 
         Question questionToSave = new Question(question);
         Long iid = question.getCategory().getId();
@@ -97,11 +95,11 @@ public class QuestionController {
 
     @GetMapping(value = "/getAllUsersQuestions{id}")
     public List<Question> sendToClientAllUsersQuestions(@PathVariable Long id){
-        List<QuestionDTO> questionForms = questionService.findAll();
+        List<SendQuestionDTO> questionForms = questionService.findAll();
         List<Question> userQuestions = new ArrayList<>();
 
 
-        for (QuestionDTO questionForm: questionForms){
+        for (SendQuestionDTO questionForm: questionForms){
             if(questionForm.getUserId().equals(id)){
 
                 userQuestions.add(questionForm.getQuestion());

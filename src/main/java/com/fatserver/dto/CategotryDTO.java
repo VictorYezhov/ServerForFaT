@@ -1,4 +1,4 @@
-package com.fatserver.IncomingForms;
+package com.fatserver.dto;
 
 /**
  * Created by Victor on 14.05.2018.

@@ -1,7 +1,7 @@
 package com.fatserver.service;
 
 import com.fatserver.entity.Question;
-import com.fatserver.sendingForms.QuestionDTO;
+import com.fatserver.dto.SendQuestionDTO;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface QuestionService {
 
     void save(Question question);
 
-    List<QuestionDTO> findAll();
+    List<SendQuestionDTO> findAll();
 
     Question findOne(Long id);
 
@@ -22,6 +22,6 @@ public interface QuestionService {
     void update(Question question);
 
 
-    List<QuestionDTO> findAllByCategoty(Long categoryId);
+    List<SendQuestionDTO> findAllByCategoty(Long categoryId);
 
 }

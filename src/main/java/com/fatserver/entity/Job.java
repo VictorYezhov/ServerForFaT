@@ -1,7 +1,7 @@
 package com.fatserver.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fatserver.IncomingForms.JobDTO;
+import com.fatserver.dto.JobDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;

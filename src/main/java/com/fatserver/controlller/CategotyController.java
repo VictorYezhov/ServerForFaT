@@ -1,6 +1,5 @@
 package com.fatserver.controlller;
 
-import com.fatserver.IncomingForms.QuestionDTO;
 import com.fatserver.entity.Category;
 import com.fatserver.service.CategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

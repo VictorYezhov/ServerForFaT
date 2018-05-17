@@ -1,8 +1,8 @@
 package com.fatserver.controlller;
 
 
-import com.fatserver.IncomingForms.SkillDTO;
-import com.fatserver.IncomingForms.SendSkillsForm;
+import com.fatserver.dto.SkillDTO;
+import com.fatserver.dto.SendSkillsForm;
 import com.fatserver.entity.Skill;
 import com.fatserver.entity.User;
 import com.fatserver.service.SkillService;

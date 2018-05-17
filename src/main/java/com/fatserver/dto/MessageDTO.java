@@ -1,18 +1,8 @@
-package com.fatserver.sendingForms;
+package com.fatserver.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fatserver.entity.Contact;
 import com.fatserver.entity.Message;
-import com.fatserver.entity.User;
-import com.fatserver.helpers.JsonDateSerializer;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.sql.Timestamp;
 
 /**

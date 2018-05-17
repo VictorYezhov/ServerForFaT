@@ -1,7 +1,6 @@
-package com.fatserver.sendingForms;
+package com.fatserver.dto;
 
 import com.fatserver.entity.Comment;
-import org.springframework.http.ResponseEntity;
 
 /**
  * Created by Victor on 22.03.2018.

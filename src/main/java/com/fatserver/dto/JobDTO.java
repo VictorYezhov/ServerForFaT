@@ -1,4 +1,4 @@
-package com.fatserver.IncomingForms;
+package com.fatserver.dto;
 
 import com.fatserver.entity.Type;
 

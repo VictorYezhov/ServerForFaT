@@ -1,4 +1,4 @@
-package com.fatserver.IncomingForms;
+package com.fatserver.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fatserver.entity.Appointment;

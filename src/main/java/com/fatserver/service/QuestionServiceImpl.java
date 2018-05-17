@@ -2,9 +2,8 @@ package com.fatserver.service;
 
 import com.fatserver.dao.CategoryDao;
 import com.fatserver.dao.QuestionDao;
-import com.fatserver.entity.Category;
 import com.fatserver.entity.Question;
-import com.fatserver.sendingForms.QuestionDTO;
+import com.fatserver.dto.SendQuestionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +29,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDTO> findAll() {
+    public List<SendQuestionDTO> findAll() {
         List<Question> questions =  questionDao.findAll();
 
         return formDtos(questions);
@@ -38,7 +37,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
-    public List<QuestionDTO> findAllByCategoty(Long categoryId) {
+    public List<SendQuestionDTO> findAllByCategoty(Long categoryId) {
 
         List<Question> questions = questionDao.findQuestionsByCategory(categoryDao.findOne(categoryId));
 
@@ -62,11 +61,11 @@ public class QuestionServiceImpl implements QuestionService {
         questionDao.save(question);
     }
 
-    private List<QuestionDTO> formDtos(List<Question> questions){
-        List<QuestionDTO> forms = new ArrayList<>();
-        QuestionDTO qf;
+    private List<SendQuestionDTO> formDtos(List<Question> questions){
+        List<SendQuestionDTO> forms = new ArrayList<>();
+        SendQuestionDTO qf;
         for (Question q: questions ) {
-            qf = new QuestionDTO();
+            qf = new SendQuestionDTO();
             qf.setQuestion(q);
             qf.setUserId(q.getUser().getId());
             qf.setUserName(q.getUser().getName());

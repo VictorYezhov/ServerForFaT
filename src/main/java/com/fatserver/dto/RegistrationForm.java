@@ -1,14 +1,4 @@
-package com.fatserver.IncomingForms;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fatserver.entity.City;
-import com.fatserver.entity.Skill;
-
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import java.util.HashSet;
-import java.util.Set;
+package com.fatserver.dto;
 
 /**
  * Created by Victor on 17.02.2018.

@@ -1,6 +1,4 @@
-package com.fatserver.IncomingForms;
-
-import com.fatserver.entity.Skill;
+package com.fatserver.dto;
 
 import java.util.List;
 

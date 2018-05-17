@@ -1,14 +1,12 @@
-package com.fatserver.sendingForms;
+package com.fatserver.dto;
 
 import com.fatserver.entity.Question;
-
-import java.security.PrivateKey;
 
 /**
  * Created by Victor on 06.03.2018.
  * Container for sending information about question
  */
-public class QuestionDTO {
+public class SendQuestionDTO {
 
     private Question question;
     private Long userId;

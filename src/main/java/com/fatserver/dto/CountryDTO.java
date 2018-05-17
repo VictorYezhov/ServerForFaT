@@ -1,8 +1,4 @@
-package com.fatserver.IncomingForms;
-
-import com.fatserver.entity.City;
-
-import java.util.List;
+package com.fatserver.dto;
 
 /**
  * Created by Victor on 17.04.2018.

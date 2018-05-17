@@ -3,30 +3,14 @@ package com.fatserver.controlller;
 
 import com.fatserver.dao.*;
 import com.fatserver.entity.*;
-import com.fatserver.helpers.ImageLoader;
-import com.fatserver.sendingForms.CommentForm;
-import com.fatserver.sendingForms.ContactDTO;
-import com.fatserver.sendingForms.MessageDTO;
+import com.fatserver.dto.MessageDTO;
 import com.fatserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.http.CacheControl;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 //import sun.misc.IOUtils;
 
-import javax.imageio.ImageIO;
-import javax.jws.soap.SOAPBinding;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController

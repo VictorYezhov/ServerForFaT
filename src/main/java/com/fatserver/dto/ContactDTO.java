@@ -1,4 +1,4 @@
-package com.fatserver.sendingForms;
+package com.fatserver.dto;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

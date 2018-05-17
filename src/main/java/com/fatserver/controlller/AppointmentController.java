@@ -1,6 +1,6 @@
 package com.fatserver.controlller;
 
-import com.fatserver.IncomingForms.AppointmentDTO;
+import com.fatserver.dto.AppointmentDTO;
 import com.fatserver.entity.Appointment;
 import com.fatserver.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
