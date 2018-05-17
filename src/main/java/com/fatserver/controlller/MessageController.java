@@ -6,6 +6,7 @@ import com.fatserver.entity.Message;
 import com.fatserver.entity.User;
 import com.fatserver.dto.ContactDTO;
 import com.fatserver.dto.MessageDTO;
+import com.fatserver.network.NotificationType;
 import com.fatserver.service.ContactService;
 import com.fatserver.service.MessageService;
 import com.fatserver.service.NotificationSender;
@@ -131,7 +132,7 @@ public class MessageController {
         }else {
             getter = contact.getSide1();
         }
-        notificationSender.sendNotification(contact, getter);
+        notificationSender.sendNotificationAboutPersonalMessage(contact, getter);
 
 
         return "OK";

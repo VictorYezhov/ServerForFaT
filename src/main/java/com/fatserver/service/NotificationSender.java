@@ -2,6 +2,7 @@ package com.fatserver.service;
 
 import com.fatserver.entity.Contact;
 import com.fatserver.entity.User;
+import com.fatserver.network.NotificationType;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -20,10 +21,21 @@ public class NotificationSender {
         this.fcmService = fcmService;
     }
 
-    public void sendNotification(Contact contact, User userTo){
+    public void sendNotificationAboutPersonalMessage(Contact contact, User userTo){
 
         try {
-            this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), contact.getId().toString());
+            this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), contact.getId().toString(),
+                    NotificationType.PERSONALMESSAGE);
+        }
+        catch (InterruptedException | ExecutionException e) {
+            System.err.println("send personal message\n"+ e);
+        }
+    }
+
+    public void sendNotificationAboutNewContract(User from, User userTo){
+        try {
+            this.fcmService.sendPersonalMessage(userTo.getGcmRegId(), from.getId().toString(),
+                    NotificationType.NEWCONTRACT);
         }
         catch (InterruptedException | ExecutionException e) {
             System.err.println("send personal message\n"+ e);

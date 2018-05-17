@@ -67,7 +67,7 @@ public class GreetingController {
         User usetTo = userServices.findOne(1L);
         User userFrom = userServices.findOne(4L);
         Contact contact =  contactService.findContactBySides(usetTo.getId(), userFrom.getId());
-        notificationSender.sendNotification(contact,usetTo);
+        notificationSender.sendNotificationAboutPersonalMessage(contact,usetTo);
 
 
         return mDTOS;

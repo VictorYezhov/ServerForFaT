@@ -1,6 +1,7 @@
 package com.fatserver.service;
 
 import com.fatserver.configuration.FCMConfig;
+import com.fatserver.network.NotificationType;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -37,7 +38,7 @@ public class FCMService {
     }
 
 
-    public void sendPersonalMessage(String clientToken, String from)
+    public void sendPersonalMessage(String clientToken, String from, NotificationType notificationType)
             throws InterruptedException, ExecutionException {
         AndroidConfig androidConfig = AndroidConfig.builder()
                 .setTtl(Duration.ofMinutes(2).toMillis()).setCollapseKey("personal")
@@ -51,6 +52,7 @@ public class FCMService {
                 .build();
 
         Message message = Message.builder().setToken(clientToken)
+                .putData("type", notificationType.getType())
                 .setApnsConfig(apnsConfig).setAndroidConfig(androidConfig)
                 .setNotification(new Notification("Personal Message", from))
                 .build();
