@@ -22,7 +22,6 @@ import java.util.List;
 @RestController
 public class CommentController {
 
-
     @Autowired
     UserService userService;
 
@@ -40,18 +39,14 @@ public class CommentController {
         List<CommentForm> commentForms = new ArrayList<>();
         User user;
         CommentForm commentForm;
-
         for (Comment com: questionService.findOne(Long.decode(id)).getCommentsList()) {
             user = userService.findOne(com.getUserId());
             commentForm = new CommentForm();
             commentForm.setComment(new CommentDTO(com));
             commentForm.setUserName(user.getName());
             commentForm.setUserSurname(user.getFamilyName());
-//            commentForm.setImage(ImageLoader.loadImageFromFileSystem(user.getPathToImage()).getBody());
             commentForms.add(commentForm);
-
         }
-
         return commentForms;
     }
 
