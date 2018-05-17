@@ -44,14 +44,15 @@ public class UserController {
      * @return
      */
     @PostMapping(value = "/user/add")
-    public User addUser(@RequestBody RegistrationForm user){
+    public UserDTO addUser(@RequestBody RegistrationForm user){
         System.out.println("Registration request");
         Country country = countryService.findCountryByName(user.getCity().getCountry().getName());
         City city;
 
 
         if(userService.findByName(user.getName())!=null){
-            return new User(user);
+            User u = new User(user);
+            return formUserDTOFromUser(u);
         }else {
             User newUser = new User(user);
             if(country != null){
@@ -69,13 +70,8 @@ public class UserController {
                 return null;
             }
             userService.save(newUser);
-            return newUser;
+            return formUserDTOFromUser(newUser);
         }
-
-
-
-
-
 
     }
 
@@ -119,9 +115,10 @@ public class UserController {
      * @return
      */
     @PostMapping(value = "/login")
-    public User login(@RequestBody LoginForm loginForm){
-        System.out.println("REQUEST_LOFINFORM");
-        return   userService.findByEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
+    public UserDTO login(@RequestBody LoginForm loginForm){
+
+        User u = userService.findByEmailAndPassword(loginForm.getEmail(), loginForm.getPassword());
+        return  formUserDTOFromUser(u);
     }
 
     /**
@@ -143,16 +140,15 @@ public class UserController {
      Method that processes login with Google account
      */
     @PostMapping(value = "/googleLogin")
-    public User getGoogleUser(@RequestBody RegistrationForm googleUser){
+    public UserDTO getGoogleUser(@RequestBody RegistrationForm googleUser){
         System.out.println("REQUEST_GOOGLE_LOGIN");
         User foundUser = userService.findByEmailAndPassword(googleUser.getEmail(), googleUser.getPassword());
         if(foundUser != null){
-            return foundUser;
+            return formUserDTOFromUser(foundUser);
         }else {
             User u = new User(googleUser);
             userService.save(u);
-            return u;
-
+            return formUserDTOFromUser(u);
         }
     }
 
@@ -163,16 +159,19 @@ public class UserController {
      * @return
      */
     @PostMapping(value = "/updateUser")
-    public User updateUser(@RequestBody LoginForm loginForm) {
-        return userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
+    public UserDTO updateUser(@RequestBody LoginForm loginForm) {
+
+        User user = userService.findByEmailAndPassword(loginForm.getEmail(),loginForm.getPassword());
+        return formUserDTOFromUser(user);
     }
 
     @PostMapping(value = "/userInfo")
-    public User loadUserInfo(@RequestParam Long id){
+    public UserDTO loadUserInfo(@RequestParam Long id){
 
         User user = userService.findOne(id);
-        user.setPassword(null);
-        return user;
+        UserDTO userDTO = formUserDTOFromUser(user);
+        userDTO.setPassword(null);
+        return userDTO;
     }
 
     /**
@@ -248,5 +247,27 @@ public class UserController {
         return ratingReviewsDTO;
     }
 
+
+    private UserDTO formUserDTOFromUser(User user){
+
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
+        userDTO.setFamilyName(user.getFamilyName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setCity(user.getCity());
+        userDTO.setJobs(user.getJobs());
+        userDTO.setSkills(user.getSkills());
+
+        List<ReviewDTO> reviewDTOS  = new ArrayList<>();
+        for(Review v: user.getReviewsAboutUser()) {
+            reviewDTOS.add(new ReviewDTO(v));
+        }
+        userDTO.setReviews(reviewDTOS);
+
+        return userDTO;
+    }
 
 }
