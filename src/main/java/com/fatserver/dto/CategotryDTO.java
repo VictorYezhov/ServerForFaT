@@ -12,6 +12,7 @@ public class CategotryDTO {
 
 
     public CategotryDTO() {
+
     }
 
     public CategotryDTO(Category category) {

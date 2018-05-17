@@ -20,6 +20,9 @@ public class ContactDTO {
     private Timestamp timestamp;
     private String lastMessageText;
 
+    public ContactDTO() {
+    }
+
     public ContactDTO(Contact contact, User userfrom) {
         id =  contact.getId();
         from = userfrom.getName()+" "+userfrom.getFamilyName();
