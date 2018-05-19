@@ -52,7 +52,6 @@ public class CommentController {
 
 
 
-
     @PostMapping(value = "/sendNewComment{id}")
     public String sendedComment(@RequestBody Comment comment, @PathVariable Long id){
         comment.setDateTime(new Timestamp(System.currentTimeMillis()));

@@ -260,6 +260,7 @@ public class UserController {
         userDTO.setCity(user.getCity());
         userDTO.setJobs(user.getJobs());
         userDTO.setSkills(user.getSkills());
+        userDTO.setMobileNumber(user.getMobileNumber());
 
         List<ReviewDTO> reviewDTOS  = new ArrayList<>();
         for(Review v: user.getReviewsAboutUser()) {
