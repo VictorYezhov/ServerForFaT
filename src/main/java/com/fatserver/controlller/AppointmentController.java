@@ -2,6 +2,7 @@ package com.fatserver.controlller;
 
 import com.fatserver.dto.AppointmentDTO;
 import com.fatserver.dto.IdForAppointmentDTO;
+import com.fatserver.dto.QuestionTopicAndPriceDTO;
 import com.fatserver.entity.Appointment;
 import com.fatserver.entity.Question;
 import com.fatserver.entity.User;
@@ -82,5 +83,10 @@ public class AppointmentController {
         return appointmentDTOS;
     }
 
+    @GetMapping("/getTopicAndPriceOfQuestion{id}")
+    public QuestionTopicAndPriceDTO sendTopicAndPriceOfQuestion(@PathVariable Long id){
+        Question q = questionService.findOne(id);
+        return new QuestionTopicAndPriceDTO(q.getTitle(), q.getPrice());
+    }
 
 }
