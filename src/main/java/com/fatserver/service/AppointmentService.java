@@ -26,5 +26,7 @@ public interface AppointmentService {
 
     Appointment findAppointmentByQuestionAndPeople(Question question, User employee, User employer);
 
+    List<Appointment> findAppointmentsByEmployeeOrEmployer(User user);
+
 
 }

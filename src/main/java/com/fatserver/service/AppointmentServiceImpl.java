@@ -59,4 +59,9 @@ public class AppointmentServiceImpl implements AppointmentService {
     public Appointment findAppointmentByQuestionAndPeople(Question question, User employee, User employer) {
         return appointmentDao.findAppointmentByQuestionAndEmployeeAndEmployer(question, employee,employer);
     }
+
+    @Override
+    public List<Appointment> findAppointmentsByEmployeeOrEmployer(User user) {
+        return appointmentDao.findAppointmentsByEmployeeOrEmployer(user, user);
+    }
 }

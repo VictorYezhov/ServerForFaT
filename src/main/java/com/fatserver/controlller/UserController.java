@@ -248,6 +248,13 @@ public class UserController {
     }
 
 
+    @GetMapping("/nameOfPersonWhoLeftComment{id}")
+    public String getNameOfPersonWhoLeftComment(@PathVariable("id") Long id){
+        User u = userService.findOne(id);
+        return u.getName() + " " + u.getFamilyName();
+    }
+
+
     private UserDTO formUserDTOFromUser(User user){
 
         UserDTO userDTO = new UserDTO();
@@ -270,5 +277,7 @@ public class UserController {
 
         return userDTO;
     }
+
+
 
 }
