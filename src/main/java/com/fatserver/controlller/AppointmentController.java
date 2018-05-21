@@ -83,6 +83,24 @@ public class AppointmentController {
         return appointmentDTOS;
     }
 
+    @PostMapping("/updateAppointment")
+    public String updateAppointment(@RequestBody AppointmentDTO appointmentDTO){
+
+        Appointment appointment = appointmentService.findOne(appointmentDTO.getId());
+
+
+        appointment.setTimeFor(appointmentDTO.getTimeFor());
+        appointment.setAcceeptedByEmployer(appointmentDTO.isAcceeptedByEmployer());
+        appointment.setAcceptedByEmployee(appointmentDTO.isAcceptedByEmployee());
+        appointment.setSuccessForEmployer(appointmentDTO.isSuccessForEmployer());
+        appointment.setAcceptedByEmployee(appointmentDTO.isAcceptedByEmployee());
+        appointmentService.update(appointment);
+
+
+
+        return "OK";
+    }
+
     @GetMapping("/getTopicAndPriceOfQuestion{id}")
     public QuestionTopicAndPriceDTO sendTopicAndPriceOfQuestion(@PathVariable Long id){
         Question q = questionService.findOne(id);

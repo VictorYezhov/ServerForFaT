@@ -23,6 +23,9 @@ public class AppointmentDTO {
     private boolean successForEmployer;
     private boolean successForEmployee;
 
+    public AppointmentDTO() {
+    }
+
     public AppointmentDTO(Appointment appointment) {
         id = appointment.getId();
         employeeId = appointment.getEmployee().getId();
