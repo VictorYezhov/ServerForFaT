@@ -10,10 +10,7 @@ import com.fatserver.service.NotificationSender;
 import com.fatserver.service.QuestionService;
 import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +61,25 @@ public class AppointmentController {
             appointment.setQuestion(questionService.findOne(ifa.getQuestion_id()));
             appointmentService.save(appointment);
             Appointment a = appointmentService.findAppointmentByQuestionAndPeople(question,to,from);
-            notificationSender.sendNotificationAboutNewContract(a,to);
+             notificationSender.sendNotificationAboutNewContract(a,to);
         }
 
 
         return "Ok";
+    }
+
+    @GetMapping("/getAllUserAppointments{id}")
+    public List<AppointmentDTO> sendToClientAllUsersAppointments(@PathVariable Long id){
+        User me = userService.findOne(id);
+        List<Appointment> appointments = appointmentService.findAppointmentsByEmployeeOrEmployer(me);
+        List<AppointmentDTO> appointmentDTOS = new ArrayList<>();
+
+        for (Appointment app:appointments) {
+            AppointmentDTO appNew = new AppointmentDTO(app);
+            appointmentDTOS.add(appNew);
+        }
+
+        return appointmentDTOS;
     }
 
 
