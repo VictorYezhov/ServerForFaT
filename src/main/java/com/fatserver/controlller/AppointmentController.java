@@ -107,4 +107,10 @@ public class AppointmentController {
         return new QuestionTopicAndPriceDTO(q.getTitle(), q.getPrice());
     }
 
+    @GetMapping("/getNameOfYourPartner{id}")
+    public String sendNameOfUserPartner(@PathVariable Long id){
+        User u = userService.findOne(id);
+        return u.getFamilyName() +"@"+ u.getName();
+    }
+
 }
