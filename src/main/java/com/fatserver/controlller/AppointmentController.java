@@ -130,4 +130,9 @@ public class AppointmentController {
         return "OK";
     }
 
+    @GetMapping("/updateAppointment{id}")
+    public AppointmentDTO updateAppointmentById(@PathVariable Long id){
+        return new AppointmentDTO(appointmentService.findOne(id));
+    }
+
 }
