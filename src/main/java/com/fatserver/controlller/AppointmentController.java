@@ -97,7 +97,6 @@ public class AppointmentController {
         appointmentService.update(appointment);
 
 
-
         return "OK";
     }
 
@@ -111,6 +110,26 @@ public class AppointmentController {
     public String sendNameOfUserPartner(@PathVariable Long id){
         User u = userService.findOne(id);
         return u.getFamilyName() +"@"+ u.getName();
+    }
+
+    @PostMapping(value = "/changeAcceptingOnServerSide")
+    public String changeAccepting(@RequestParam("contract_id") Long contract_id,
+                                  @RequestParam("person_id") Long person_id,
+                                  @RequestParam("accepting") boolean accepting,
+                                  @RequestParam("another_person_id") Long another_person_id){
+
+        Appointment appointment = appointmentService.findOne(contract_id);
+
+        if(appointment.getEmployee().getId().equals(person_id)){
+            appointment.setAcceptedByEmployee(accepting);
+        }else if(appointment.getEmployer().getId().equals(person_id)) {
+            appointment.setAcceeptedByEmployer(accepting);
+        }
+
+        appointmentService.update(appointment);
+        notificationSender.sendNotificationAboutNewContract(appointment,userService.findOne(another_person_id));
+
+        return "OK";
     }
 
 }
