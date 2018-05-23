@@ -5,7 +5,7 @@
 
 	<groupId>com.fatserver</groupId>
 	<artifactId>server</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.5</version>
 	<packaging>jar</packaging>
 
 	<name>server</name>
@@ -57,6 +57,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9</version>
+		</dependency>
 
 
 

@@ -4,12 +4,12 @@ package com.fatserver.controlller;
 import com.fatserver.dao.*;
 import com.fatserver.entity.*;
 import com.fatserver.dto.MessageDTO;
+
 import com.fatserver.service.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-//import sun.misc.IOUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -56,21 +56,45 @@ public class GreetingController {
     public List<MessageDTO> greeting(@RequestParam(value="name", defaultValue="World") String name) {
 
 
-        List<Message> commentForms = messageDao.findAll();
+//        name = "c.xls";
+//        InputStream in = null;
+//        HSSFWorkbook wb = null;
+//        List<Country> las = new ArrayList<>();
+//        try {
+//            in = new FileInputStream(name);
+//            wb = new HSSFWorkbook(in);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        Sheet sheet = wb.getSheetAt(0);
+//        Iterator<Row> it = sheet.iterator();
+//        Country country;
+//        while (it.hasNext()) {
+//            country = new Country();
+//            Row row = it.next();
+//            Iterator<Cell> cells = row.iterator();
+//            while (cells.hasNext()) {
+//                Cell cell = cells.next();
+//                if(!cell.getStringCellValue().equals("")){
+//                    country.setName(cell.getStringCellValue());
+//                }
+//                if(cells.hasNext()) {
+//                    cell = cells.next();
+//                    if(!cell.getStringCellValue().equals("")) {
+//                        country.setCode(cell.getStringCellValue());
+//                        las.add(country);
+//                        countryService.save(country);
+//                        System.out.println("country : " + country.getName() + " code : " + country.getCode());
+//                    }
+//                }
+//            }
+//        }
+//        Contact contact =  contactService.findContactBySides(usetTo.getId(), userFrom.getId());
+        //notificationSender.sendNotificationAboutPersonalMessage(contact,usetTo);
 
-        List<MessageDTO> mDTOS = new ArrayList<>();
 
-        for(Message c:commentForms){
-            mDTOS.add(new MessageDTO(c));
-        }
-
-        User usetTo = userServices.findOne(1L);
-        User userFrom = userServices.findOne(4L);
-        Contact contact =  contactService.findContactBySides(usetTo.getId(), userFrom.getId());
-        notificationSender.sendNotificationAboutPersonalMessage(contact,usetTo);
-
-
-        return mDTOS;
+        return null;
     }
 
     @RequestMapping(value = "/index")

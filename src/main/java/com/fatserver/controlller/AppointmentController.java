@@ -87,8 +87,6 @@ public class AppointmentController {
     public String updateAppointment(@RequestBody AppointmentDTO appointmentDTO){
 
         Appointment appointment = appointmentService.findOne(appointmentDTO.getId());
-
-
         appointment.setTimeFor(appointmentDTO.getTimeFor());
         appointment.setAcceeptedByEmployer(appointmentDTO.isAcceeptedByEmployer());
         appointment.setAcceptedByEmployee(appointmentDTO.isAcceptedByEmployee());
