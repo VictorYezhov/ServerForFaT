@@ -16,6 +16,7 @@ public class QuestionDTO {
     private Set<SkillDTO> skills;
     private Integer views;
     private CategotryDTO category;
+    private Long userId;
 
 
     public QuestionDTO(){
@@ -34,6 +35,7 @@ public class QuestionDTO {
         for(Skill s: q.getSkills()){
             skills.add(new SkillDTO(s.getId(), s.getName()));
         }
+        userId = q.getUser().getId();
 
         views = q.getViews();
         category = new CategotryDTO(q.getCategory());
@@ -103,6 +105,14 @@ public class QuestionDTO {
 
     public void setCategory(CategotryDTO categotryDTO) {
         this.category = categotryDTO;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     @Override

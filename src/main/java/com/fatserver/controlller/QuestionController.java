@@ -99,8 +99,13 @@ public class QuestionController {
                 userQuestions.add(questionForm.getQuestion());
             }
         }
-
         return userQuestions;
+    }
+
+    @GetMapping("/getQuestionTitle{id}")
+    public String getQuestionTitle(@PathVariable("id") Long id){
+        String s = questionService.findOne(id).getTitle();
+        return s.replaceAll("\\s", "@");
     }
 
     @PostMapping(value = "/plusOneToViewCounter{id}")
