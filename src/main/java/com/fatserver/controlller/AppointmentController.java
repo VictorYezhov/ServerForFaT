@@ -96,6 +96,8 @@ public class AppointmentController {
         appointment.setAcceptedByEmployee(appointmentDTO.isAcceptedByEmployee());
         appointmentService.update(appointment);
 
+        notificationSender.sendNotificationAboutNewContract(appointment,userService.findOne(appointmentDTO.getEmployeeId()));
+
 
         return "OK";
     }
