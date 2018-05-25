@@ -22,6 +22,7 @@ public class AppointmentDTO {
     private boolean ended;
     private boolean successForEmployer;
     private boolean successForEmployee;
+    private boolean started;
 
     public AppointmentDTO() {
     }
@@ -117,5 +118,13 @@ public class AppointmentDTO {
 
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
     }
 }

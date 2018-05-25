@@ -32,6 +32,7 @@ public class Appointment {
     private boolean ended;
     private boolean successForEmployer;
     private boolean successForEmployee;
+    private boolean started;
 
     public Appointment() {
     }
@@ -114,5 +115,13 @@ public class Appointment {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
     }
 }
