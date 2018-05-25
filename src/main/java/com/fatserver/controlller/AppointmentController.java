@@ -62,6 +62,7 @@ public class AppointmentController {
             appointment.setEmployee(to);
             appointment.setQuestion(questionService.findOne(ifa.getQuestion_id()));
             appointment.setTimeFor(null);
+            appointment.setStarted(false);
             appointmentService.save(appointment);
             Appointment a = appointmentService.findAppointmentByQuestionAndPeople(question,to,from);
              notificationSender.sendNotificationAboutNewContract(a,to);
