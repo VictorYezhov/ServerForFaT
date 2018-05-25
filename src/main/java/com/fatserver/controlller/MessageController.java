@@ -123,7 +123,6 @@ public class MessageController {
         message.setColor(0);
         message.setMessage(messageDTO.getMessage());
         message.setRead(false);
-        message.setTimestamp(new Timestamp(System.currentTimeMillis()));
         messageService.save(message);
 
         User getter;

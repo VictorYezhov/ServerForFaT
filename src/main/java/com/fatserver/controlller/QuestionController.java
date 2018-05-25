@@ -78,7 +78,6 @@ public class QuestionController {
 
         }
         questionToSave.setUser(user);
-        questionToSave.setDateTime(new Timestamp(System.currentTimeMillis()));
         user.getQuestions().add(questionToSave);
         questionService.save(questionToSave);
         skillService.save(skill);

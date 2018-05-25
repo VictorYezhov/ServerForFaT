@@ -13,7 +13,7 @@ import com.fatserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +61,7 @@ public class AppointmentController {
             appointment.setEmployer(from);
             appointment.setEmployee(to);
             appointment.setQuestion(questionService.findOne(ifa.getQuestion_id()));
-            appointment.setTimeFor(new Timestamp(System.currentTimeMillis()));
+            appointment.setTimeFor(null);
             appointmentService.save(appointment);
             Appointment a = appointmentService.findAppointmentByQuestionAndPeople(question,to,from);
              notificationSender.sendNotificationAboutNewContract(a,to);
