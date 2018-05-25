@@ -139,4 +139,10 @@ public class AppointmentController {
         return new AppointmentDTO(appointmentService.findOne(id));
     }
 
+    @PostMapping(value = "/deleteAppointment{id}")
+    public String deleteAppointmentById(@PathVariable Long id){
+        appointmentService.delete(id);
+        return "OK";
+    }
+
 }

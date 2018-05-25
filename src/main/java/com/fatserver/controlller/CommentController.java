@@ -1,10 +1,12 @@
 package com.fatserver.controlller;
 
 import com.fatserver.dto.CommentDTO;
+import com.fatserver.entity.Appointment;
 import com.fatserver.entity.Comment;
 import com.fatserver.entity.Question;
 import com.fatserver.entity.User;
 import com.fatserver.dto.CommentForm;
+import com.fatserver.service.AppointmentService;
 import com.fatserver.service.CommentsService;
 import com.fatserver.service.QuestionService;
 import com.fatserver.service.UserService;
@@ -30,6 +32,9 @@ public class CommentController {
 
     @Autowired
     QuestionService questionService;
+
+    @Autowired
+    AppointmentService appointmentService;
 
 
 
@@ -68,5 +73,20 @@ public class CommentController {
 
         return "OK";
     }
+
+//    @PostMapping(value = "/checkIfTwoUsersAreContacted")
+//    public Boolean checkIfTwoUsersAreContacted(@RequestParam("personWhoAskedQuestion") Long personWhoAskedQuestion,
+//                                               @RequestParam("personWhoLeftComment") Long personWhoLeftComment){
+//
+//        List<Appointment> appointmentList = appointmentService.findAll();
+//        for (Appointment app:
+//             appointmentList) {
+//            if(app.getEmployer().getId().equals(personWhoAskedQuestion) && app.getEmployee().getId().equals(personWhoLeftComment)){
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
 }
