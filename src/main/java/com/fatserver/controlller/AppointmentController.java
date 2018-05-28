@@ -91,6 +91,7 @@ public class AppointmentController {
 
         Appointment appointment = appointmentService.findOne(appointmentDTO.getId());
         appointment.setTimeFor(appointmentDTO.getTimeFor());
+        System.out.println(appointmentDTO.getTimeFor());
         appointment.setAcceeptedByEmployer(appointmentDTO.isAcceeptedByEmployer());
         appointment.setAcceptedByEmployee(appointmentDTO.isAcceptedByEmployee());
         appointment.setSuccessForEmployer(appointmentDTO.isSuccessForEmployer());
@@ -131,6 +132,25 @@ public class AppointmentController {
 
         appointmentService.update(appointment);
         notificationSender.sendNotificationAboutNewContract(appointment,userService.findOne(another_person_id));
+
+        return "OK";
+    }
+
+    @PostMapping(value = "/changeVariableOfContractEnd")
+    public String changeEnd(@RequestParam("contract_id") Long contract_id,
+                                  @RequestParam("person_id") Long person_id,
+                                  @RequestParam("end") boolean end,
+                                  @RequestParam("another_person_id") Long another_person_id){
+
+        Appointment appointment = appointmentService.findOne(contract_id);
+
+        if(appointment.getEmployee().getId().equals(person_id)){
+            appointment.setSuccessForEmployee(end);
+        }else if(appointment.getEmployer().getId().equals(person_id)) {
+            appointment.setSuccessForEmployer(end);
+        }
+
+        appointmentService.update(appointment);
 
         return "OK";
     }
