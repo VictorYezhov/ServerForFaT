@@ -104,6 +104,19 @@ public class AppointmentController {
         return "OK";
     }
 
+    @PostMapping("/startAppointment")
+    public String startAppointment(@RequestParam("id") Long id){
+
+        System.out.println("Starting appointment");
+
+        Appointment appointment = appointmentService.findOne(id);
+        appointment.setStarted(true);
+        appointmentService.update(appointment);
+        notificationSender.sendNotificationAboutNewContract(appointment, userService.findOne(appointment.getEmployee().getId()));
+        notificationSender.sendNotificationAboutNewContract(appointment, userService.findOne(appointment.getEmployer().getId()));
+        return "OK";
+    }
+
     @GetMapping("/getTopicAndPriceOfQuestion{id}")
     public QuestionTopicAndPriceDTO sendTopicAndPriceOfQuestion(@PathVariable Long id){
         Question q = questionService.findOne(id);
@@ -150,7 +163,14 @@ public class AppointmentController {
             appointment.setSuccessForEmployer(end);
         }
 
+        if(appointment.isSuccessForEmployee() && appointment.isSuccessForEmployer()){
+            appointment.setEnded(true);
+        }
+
         appointmentService.update(appointment);
+
+        notificationSender.sendNotificationAboutNewContract(appointment, appointment.getEmployee());
+        notificationSender.sendNotificationAboutNewContract(appointment, appointment.getEmployer());
 
         return "OK";
     }

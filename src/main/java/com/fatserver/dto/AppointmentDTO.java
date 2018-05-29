@@ -38,6 +38,7 @@ public class AppointmentDTO {
         ended = appointment.isEnded();
         successForEmployer = appointment.isSuccessForEmployer();
         successForEmployee = appointment.isSuccessForEmployee();
+        started = appointment.isStarted();
     }
 
     public Long getId() {
