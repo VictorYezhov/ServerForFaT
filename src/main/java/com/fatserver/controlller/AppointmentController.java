@@ -194,10 +194,12 @@ public class AppointmentController {
             appointment.setEnded(true);
         }
 
+
         appointmentService.update(appointment);
 
         notificationSender.sendNotificationAboutNewContract(appointment, appointment.getEmployee());
         notificationSender.sendNotificationAboutNewContract(appointment, appointment.getEmployer());
+
 
         return "OK";
     }
