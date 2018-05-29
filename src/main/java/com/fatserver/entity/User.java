@@ -26,7 +26,7 @@ public class User implements Serializable {
     private String familyName;
     private String email;
     private String password;
-    private int rating;
+    private float rating;
     private String address;
     private String mobileNumber;
     private String pathToImage;
@@ -163,11 +163,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 

@@ -64,4 +64,11 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> findAppointmentsByEmployeeOrEmployer(User user) {
         return appointmentDao.findAppointmentsByEmployeeOrEmployer(user, user);
     }
+
+    @Override
+    public Integer countAllByEndedAndEmployee(Boolean ended, User employee) {
+        return appointmentDao.countAllByEndedAndEmployee(ended, employee);
+    }
+
+
 }

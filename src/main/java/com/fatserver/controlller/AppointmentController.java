@@ -5,11 +5,9 @@ import com.fatserver.dto.IdForAppointmentDTO;
 import com.fatserver.dto.QuestionTopicAndPriceDTO;
 import com.fatserver.entity.Appointment;
 import com.fatserver.entity.Question;
+import com.fatserver.entity.Review;
 import com.fatserver.entity.User;
-import com.fatserver.service.AppointmentService;
-import com.fatserver.service.NotificationSender;
-import com.fatserver.service.QuestionService;
-import com.fatserver.service.UserService;
+import com.fatserver.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +32,9 @@ public class AppointmentController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ReviewService reviewService;
 
 //    public AppointmentController(NotificationSender notificationSender) {
 //        this.notificationSender = notificationSender;
@@ -146,6 +147,32 @@ public class AppointmentController {
         appointmentService.update(appointment);
         notificationSender.sendNotificationAboutNewContract(appointment,userService.findOne(another_person_id));
 
+        return "OK";
+    }
+
+    @PostMapping(value = "/sendReviewAndRating")
+    public String getUserReviewAndRating(@RequestParam("user_about") Long id_about,
+                                         @RequestParam("rating") float rating,
+                                         @RequestParam("review") String reviewText,
+                                         @RequestParam("user_from") Long id_from){
+        User u_about = userService.findOne(id_about);
+        User u_from = userService.findOne(id_from);
+        List<Review> reviews = u_about.getReviewsAboutUser();
+        Review r = new Review();
+        r.setReview(reviewText);
+        r.setFrom(u_from);
+        r.setAbout(u_about);
+        r.setAnonymous(false);
+        reviewService.save(r);
+        reviews.add(r);
+        u_about.setReviewsAboutUser(reviews);
+
+        Integer amount = appointmentService.countAllByEndedAndEmployee(true,u_about);
+        float sum = u_about.getRating() * amount;
+
+        u_about.setRating((sum + rating)/(amount + 1));
+
+        userService.update(u_about);
         return "OK";
     }
 

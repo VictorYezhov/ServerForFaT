@@ -28,5 +28,7 @@ public interface AppointmentService {
 
     List<Appointment> findAppointmentsByEmployeeOrEmployer(User user);
 
+    Integer countAllByEndedAndEmployee(Boolean ended, User employee);
+
 
 }

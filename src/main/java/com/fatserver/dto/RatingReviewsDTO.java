@@ -9,7 +9,7 @@ import java.util.List;
 public class RatingReviewsDTO {
 
     private List<ReviewDTO> reviews;
-    private int rating;
+    private float rating;
 
     public RatingReviewsDTO() {
         reviews = new ArrayList<>();
@@ -23,11 +23,11 @@ public class RatingReviewsDTO {
         this.reviews = reviews;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }

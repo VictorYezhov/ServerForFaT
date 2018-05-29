@@ -16,4 +16,6 @@ public interface AppointmentDao extends JpaRepository<Appointment, Long> {
     Appointment findAppointmentByQuestionAndEmployeeAndEmployer(Question question, User employee, User employer);
 
     List<Appointment> findAppointmentsByEmployeeOrEmployer(User user1, User user2);
+
+    Integer countAllByEndedAndEmployee(Boolean ended, User employee);
 }

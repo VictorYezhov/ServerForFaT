@@ -3,7 +3,6 @@ package com.fatserver.dto;
 import com.fatserver.entity.City;
 import com.fatserver.entity.Job;
 import com.fatserver.entity.Skill;
-import com.fatserver.entity.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -22,7 +21,7 @@ public class UserDTO {
     private String familyName;
     private String email;
     private String password;
-    private int rating;
+    private float rating;
     private String address;
     private String mobileNumber;
     private City city;
@@ -95,11 +94,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public int getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
