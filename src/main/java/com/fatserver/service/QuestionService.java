@@ -2,7 +2,9 @@ package com.fatserver.service;
 
 import com.fatserver.entity.Question;
 import com.fatserver.dto.SendQuestionDTO;
+import com.fatserver.entity.User;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -24,4 +26,5 @@ public interface QuestionService {
 
     List<SendQuestionDTO> findAllByCategoty(Long categoryId);
 
+    Question findQuestionByDateTimeAndUser(Timestamp time, User user);
 }

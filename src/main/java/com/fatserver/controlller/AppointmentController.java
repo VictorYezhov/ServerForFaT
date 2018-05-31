@@ -154,7 +154,8 @@ public class AppointmentController {
     public String getUserReviewAndRating(@RequestParam("user_about") Long id_about,
                                          @RequestParam("rating") float rating,
                                          @RequestParam("review") String reviewText,
-                                         @RequestParam("user_from") Long id_from){
+                                         @RequestParam("user_from") Long id_from,
+                                         @RequestParam("contract_id") Long c_id){
         User u_about = userService.findOne(id_about);
         User u_from = userService.findOne(id_from);
         List<Review> reviews = u_about.getReviewsAboutUser();
@@ -173,6 +174,8 @@ public class AppointmentController {
         u_about.setRating((sum + rating)/(amount + 1));
 
         userService.update(u_about);
+
+        //appointmentService.delete(c_id);
         return "OK";
     }
 

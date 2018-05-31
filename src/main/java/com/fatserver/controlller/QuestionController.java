@@ -63,7 +63,7 @@ public class QuestionController {
     }
 
     @PostMapping(value = "/sendAskingQuestion{id}")
-    public String askQuestion(@RequestBody com.fatserver.dto.QuestionDTO question, @PathVariable Long id){
+    public Long askQuestion(@RequestBody com.fatserver.dto.QuestionDTO question, @PathVariable Long id){
 
         Question questionToSave = new Question(question);
         Long iid = question.getCategory().getId();
@@ -80,10 +80,10 @@ public class QuestionController {
         questionToSave.setUser(user);
         user.getQuestions().add(questionToSave);
         questionService.save(questionToSave);
-        skillService.save(skill);
+        if (skill!=null)
+            skillService.save(skill);
 
-
-        return "OK";
+        return questionService.findQuestionByDateTimeAndUser(questionToSave.getDateTime(), user).getId();
     }
 
     @GetMapping(value = "/getAllUsersQuestions{id}")

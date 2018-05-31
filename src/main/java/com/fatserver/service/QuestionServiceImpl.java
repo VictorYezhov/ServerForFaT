@@ -5,9 +5,11 @@ import com.fatserver.dao.QuestionDao;
 import com.fatserver.dto.QuestionDTO;
 import com.fatserver.entity.Question;
 import com.fatserver.dto.SendQuestionDTO;
+import com.fatserver.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +46,11 @@ public class QuestionServiceImpl implements QuestionService {
 
 
         return formDtos(questions);
+    }
+
+    @Override
+    public Question findQuestionByDateTimeAndUser(Timestamp time, User user) {
+        return questionDao.findQuestionByDateTimeAndUser(time, user);
     }
 
     @Override
